@@ -1,0 +1,11 @@
+.app {
+  display: flex;
+}
+
+.aside {
+  min-width: 300px;
+}
+
+.mapContainer {
+  flex: 1;
+}
