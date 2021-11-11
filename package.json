@@ -10,6 +10,7 @@
     "deploy": "tsc && vite build && firebase deploy --only hosting:campusmemories"
   },
   "dependencies": {
+    "classnames": "^2.3.1",
     "firebase": "^9.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
