@@ -2,7 +2,7 @@ import { Route, Switch } from 'wouter';
 import styles from './App.module.css';
 import PATH from './constants/path';
 import BuildingMenu from './pages/BuildingMenu';
-import Detail from './pages/Detail';
+import Detail from './pages/Detail/Detail';
 import { Building } from './types/common';
 
 const routes = {

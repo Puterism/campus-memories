@@ -1,9 +1,15 @@
 .app {
   display: flex;
+  width: 100vw;
+  height: 100vh;
 }
 
 .aside {
   min-width: 300px;
+  max-width: 500px;
+  width: 30%;
+  height: 100%;
+  border-right: 1px solid black;
 }
 
 .mapContainer {
