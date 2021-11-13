@@ -2,6 +2,7 @@ import cx from 'classnames';
 import React from 'react';
 import { Link } from 'wouter';
 import PATH from '../../constants/path';
+import useQueryComment from '../../hooks/useQueryComment';
 import { Building } from '../../types/common';
 import styles from './Detail.module.css';
 import DetailForm from './DetailForm';
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const Detail = ({ building }: Props) => {
+  const [comments] = useQueryComment({ building });
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
@@ -31,9 +34,9 @@ const Detail = ({ building }: Props) => {
           충분히 꽃이 미묘한 봄바람을 아름다우냐? 때에, 있으며, 무엇을 굳세게 보라.
         </article>
         <ul className={styles.commentList}>
-          {Array.from({ length: 1 }).map((_, index) => (
-            <li key={index} className={cx(styles.commentItem, styles.detailItem)}>
-              세계에서 제일 큰 대학 정문이래요
+          {comments.map(({ id, text }) => (
+            <li key={id} className={cx(styles.commentItem, styles.detailItem)}>
+              {text}
             </li>
           ))}
         </ul>
