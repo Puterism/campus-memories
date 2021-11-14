@@ -1,0 +1,19 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "comment",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "building",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
