@@ -10,11 +10,7 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../firebase';
-import { Building, Comment } from '../types/common';
-
-interface Props {
-  building: Building;
-}
+import { Comment } from '../types/common';
 
 const getResultListFromSnapshot = <T extends { id: string; createdAt: Date }>(
   querySnapshot: QuerySnapshot<DocumentData>
@@ -24,13 +20,16 @@ const getResultListFromSnapshot = <T extends { id: string; createdAt: Date }>(
   querySnapshot.forEach((doc) => {
     const data = doc.data();
 
-    result.push({ id: doc.id, ...data, createdAt: (data.createdAt as Timestamp).toDate() } as T);
+    // Note: 댓글이 생성된 직후 데이터를 바로 받아올 때, serverTimestamp의 값이 null인 상황이 있음
+    if (data.createdAt) {
+      result.push({ id: doc.id, ...data, createdAt: (data.createdAt as Timestamp).toDate() } as T);
+    }
   });
 
   return result;
 };
 
-const useQueryComment = ({ building }: Props) => {
+const useQueryComment = (building: Comment['building']) => {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
@@ -49,7 +48,7 @@ const useQueryComment = ({ building }: Props) => {
     return unsubscribe;
   }, [building]);
 
-  return [comments];
+  return { comments };
 };
 
 export default useQueryComment;

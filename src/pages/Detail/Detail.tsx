@@ -1,5 +1,4 @@
 import cx from 'classnames';
-import React from 'react';
 import { Link } from 'wouter';
 import PATH from '../../constants/path';
 import useQueryComment from '../../hooks/useQueryComment';
@@ -12,7 +11,7 @@ interface Props {
 }
 
 const Detail = ({ building }: Props) => {
-  const [comments] = useQueryComment({ building });
+  const { comments } = useQueryComment(building);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
