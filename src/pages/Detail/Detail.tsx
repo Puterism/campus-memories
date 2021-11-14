@@ -13,10 +13,6 @@ interface Props {
 const Detail = ({ building }: Props) => {
   const { comments } = useQueryComment(building);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-  };
-
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -39,7 +35,7 @@ const Detail = ({ building }: Props) => {
             </li>
           ))}
         </ul>
-        <DetailForm onSubmit={handleSubmit} />
+        <DetailForm building={building} />
       </section>
     </div>
   );
