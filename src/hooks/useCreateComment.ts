@@ -7,12 +7,13 @@ import { Building, Comment } from '../types/common';
 const useCreateComment = (building: Building) => {
   const [isLoading, setLoading] = useState(false);
 
-  const createComment = async (text: Comment['text']) => {
+  const createComment = async (text: Comment['text'], password: string) => {
     setLoading(true);
 
     const docRef = await addDoc(collection(db, COLLECTION.COMMENT), {
       text,
       building,
+      password,
       createdAt: serverTimestamp(),
     });
 

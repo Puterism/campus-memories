@@ -2,6 +2,7 @@ import cx from 'classnames';
 import React from 'react';
 import closeIconUrl from '../../assets/close.svg';
 import LinkButton from '../../components/LinkButton/LinkButton';
+import { MESSAGE } from '../../constants/message';
 import useCreateComment from '../../hooks/useCreateComment';
 import useInput from '../../hooks/useInput';
 import { Building } from '../../types/common';
@@ -14,7 +15,7 @@ interface Props {
 
 const CommentEditor = ({ building, onClose }: Props) => {
   const [text, onChangeText, setText] = useInput('');
-  const [password, onChangePassword, setPassword] = useInput('');
+  const [password, onChangePassword, setPassword] = useInput('', { numberOnly: true });
 
   const { createComment, isLoading } = useCreateComment(building);
 
@@ -24,13 +25,17 @@ const CommentEditor = ({ building, onClose }: Props) => {
     const trimmedText = text.trim();
 
     if (trimmedText.length === 0) return;
+    if (password.length !== 4) return;
 
     try {
-      await createComment(trimmedText);
+      await createComment(trimmedText, password);
 
       setText('');
+      setPassword('');
+      onClose();
     } catch (error: unknown) {
-      alert(error);
+      console.error(error);
+      alert(MESSAGE.UNEXPECTED_ERROR);
     }
   };
   return (
@@ -48,14 +53,17 @@ const CommentEditor = ({ building, onClose }: Props) => {
           onChange={onChangeText}
           disabled={isLoading}
           autoFocus
+          required
         />
         <input
           type="password"
           className={styles.input}
           placeholder="비밀번호 (숫자 4자리)"
           maxLength={4}
+          inputMode="numeric"
           value={password}
           onChange={onChangePassword}
+          required
         />
         <button disabled={isLoading} className={styles.submitButton}>
           {isLoading ? '잠시만 기다려주세요' : '기억 공유하기'}
