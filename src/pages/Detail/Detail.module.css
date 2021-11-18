@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  color: #ffffff;
 }
 
 .header {
@@ -21,15 +22,11 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
-}
-
-.description {
-  color: gray;
+  overflow-y: auto;
 }
 
 .commentList {
   flex: 1;
-  overflow-y: auto;
   list-style: none;
   margin: 0;
   padding: 0;
