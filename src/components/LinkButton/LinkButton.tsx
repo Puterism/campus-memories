@@ -1,13 +1,22 @@
+import { ButtonHTMLAttributes } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import styles from './LinkButton.module.css';
 
-type Props = LinkProps;
+type Props = Partial<LinkProps> & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const LinkButton = ({ children, ...props }: Props) => {
+const LinkButton = ({ to, children, ...props }: Props) => {
+  if (to) {
+    return (
+      <Link to={to} className={styles.linkButton} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <Link className={styles.linkButton} {...props}>
+    <button type="button" className={styles.linkButton} {...props}>
       {children}
-    </Link>
+    </button>
   );
 };
 

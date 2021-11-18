@@ -4,6 +4,8 @@
   height: 100%;
   color: #ffffff;
   font-size: 1.125rem;
+  position: relative;
+  flex: 1;
 }
 
 .header {
@@ -35,17 +37,30 @@
 .commentList {
   flex: 1;
   list-style: none;
-  margin: 0;
+  margin: 0 1.875rem 1.875rem;
   padding: 0;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
 }
 
 .commentItem {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ffffff;
+  background-color: #ffffff;
+  color: var(--primary-color);
+  padding: 1rem 1.25rem;
+  line-height: 30px;
+  border: 1px solid var(--primary-color);
 }
 
 .detailItem {
   margin: 1.875rem;
   line-height: 30px;
+}
+
+.add {
+  position: absolute;
+  bottom: 1.875rem;
+  right: 1.875rem;
+}
+
+.add button {
+  background-color: #fffd5c;
 }

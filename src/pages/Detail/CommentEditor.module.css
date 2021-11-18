@@ -1,0 +1,53 @@
+.commentEditorContainer {
+  position: relative;
+  top: 0;
+  flex: 1;
+  height: 100%;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 56px;
+  display: flex;
+  justify-content: right;
+}
+
+.form {
+  padding: 1.875rem;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.input {
+  display: block;
+  background-color: #ffffff;
+  border: 1px solid var(--primary-color);
+  font-size: 1.125rem;
+  padding: 1.25rem;
+}
+
+.input::placeholder {
+  color: #92b3ff;
+  font-size: 1.125rem;
+}
+
+.textarea {
+  flex: 1;
+  font-family: inherit;
+  border-bottom: none;
+  resize: none;
+}
+
+.submitButton {
+  height: 55px;
+  line-height: 55px;
+  font-size: 1.5rem;
+  background-color: var(--primary-color);
+  border: none;
+  color: #fffd5c;
+  cursor: pointer;
+}

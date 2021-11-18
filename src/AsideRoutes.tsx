@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import styles from './App.module.css';
 import PATH from './constants/path';
 import About from './pages/About/About';
 import Detail from './pages/Detail/Detail';
@@ -37,11 +36,7 @@ const AsideRoutes = () => {
   return (
     <Routes>
       {Object.entries(routes).map(([path, component]) => (
-        <Route
-          key={path}
-          path={path}
-          element={<aside className={styles.aside}>{component}</aside>}
-        />
+        <Route key={path} path={path} element={component} />
       ))}
     </Routes>
   );
