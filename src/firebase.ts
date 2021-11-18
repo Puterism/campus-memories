@@ -16,7 +16,9 @@ const app = initializeApp(firebaseConfig);
 export const functions = getFunctions(app, 'asia-northeast3');
 export const db = getFirestore(app);
 
-connectFirestoreEmulator(db, 'localhost', 8080);
-connectFunctionsEmulator(functions, 'localhost', 5001);
+if (import.meta.env.DEV) {
+  connectFirestoreEmulator(db, 'localhost', 8080);
+  connectFunctionsEmulator(functions, 'localhost', 5001);
+}
 
 export default app;
