@@ -127,6 +127,7 @@ const Detail = ({ building }: Props) => {
                         type="password"
                         className={styles.commentControlInput}
                         placeholder="비밀번호"
+                        minLength={4}
                         maxLength={4}
                         inputMode="numeric"
                         value={password}

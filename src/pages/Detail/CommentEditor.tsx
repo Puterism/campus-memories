@@ -87,6 +87,7 @@ const CommentEditor = ({ building, id, initialText, onClose }: Props) => {
           type="password"
           className={styles.input}
           placeholder="비밀번호 (숫자 4자리)"
+          minLength={4}
           maxLength={4}
           inputMode="numeric"
           value={password}
