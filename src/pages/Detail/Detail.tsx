@@ -1,12 +1,12 @@
 import cx from 'classnames';
-import { Link } from 'wouter';
+import { Link } from 'react-router-dom';
 import { BUILDING } from '../../constants/building';
 import PATH from '../../constants/path';
 import useQueryComment from '../../hooks/useQueryComment';
 import { Building } from '../../types/common';
 import styles from './Detail.module.css';
-import detailContent from './DetailContent';
 import DetailForm from './DetailForm';
+import detailContent from './detailContent';
 
 interface Props {
   building: Building;

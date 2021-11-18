@@ -7,6 +7,7 @@
 .menuHeader {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .menu {
@@ -35,4 +36,8 @@
 
 .white {
   color: #ffffff;
+}
+
+.closeLink {
+  padding: 0 1rem;
 }

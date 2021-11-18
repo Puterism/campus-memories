@@ -1,4 +1,4 @@
-import { Route, Switch } from 'wouter';
+import { Routes, Route } from 'react-router-dom';
 import styles from './App.module.css';
 import PATH from './constants/path';
 import About from './pages/About/About';
@@ -33,16 +33,18 @@ const routes = {
   [PATH[Building.DD]]: <Detail building={Building.DD} />,
 };
 
-const Routes = () => {
+const AsideRoutes = () => {
   return (
-    <Switch>
+    <Routes>
       {Object.entries(routes).map(([path, component]) => (
-        <Route key={path} path={path}>
-          <aside className={styles.aside}>{component}</aside>
-        </Route>
+        <Route
+          key={path}
+          path={path}
+          element={<aside className={styles.aside}>{component}</aside>}
+        />
       ))}
-    </Switch>
+    </Routes>
   );
 };
 
-export default Routes;
+export default AsideRoutes;

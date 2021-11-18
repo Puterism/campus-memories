@@ -1,22 +1,20 @@
-import { Link } from 'wouter';
+import { BrowserRouter, Link } from 'react-router-dom';
 import styles from './App.module.css';
-import Routes from './Routes';
+import AsideRoutes from './AsideRoutes';
 import PATH from './constants/path';
 
 const App = () => {
   return (
-    <div className={styles.app}>
-      <Routes />
-      <section className={styles.mapContainer}>
-        <ul>
+    <BrowserRouter>
+      <div className={styles.app}>
+        <AsideRoutes />
+        <section className={styles.mapContainer}>
           {Object.entries(PATH).map(([building, path]) => (
-            <li key={path}>
-              <Link to={path}>{building}</Link>
-            </li>
+            <Link to={path}>{building}</Link>
           ))}
-        </ul>
-      </section>
-    </div>
+        </section>
+      </div>
+    </BrowserRouter>
   );
 };
 

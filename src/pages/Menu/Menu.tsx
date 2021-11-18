@@ -1,6 +1,7 @@
 import cx from 'classnames';
-import { Link } from 'wouter';
+import { Link } from 'react-router-dom';
 import closeIconUrl from '../../assets/close.svg';
+import LinkButton from '../../components/LinkButton/LinkButton';
 import { BUILDING } from '../../constants/building';
 import PATH from '../../constants/path';
 import styles from './Menu.module.css';
@@ -12,9 +13,9 @@ const Menu = () => {
         <Link to={PATH.about} className={cx(styles.menuItemLink, styles.white)}>
           About
         </Link>
-        <Link to={PATH.root}>
+        <LinkButton to={PATH.root} className={styles.closeLink}>
           <img src={closeIconUrl} alt="닫기" />
-        </Link>
+        </LinkButton>
       </div>
       <ul className={styles.menu}>
         {Object.entries(BUILDING).map(([building, { name, path }]) => (
