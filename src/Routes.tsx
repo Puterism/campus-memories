@@ -1,12 +1,14 @@
 import { Route, Switch } from 'wouter';
 import styles from './App.module.css';
 import PATH from './constants/path';
-import BuildingMenu from './pages/BuildingMenu';
+import About from './pages/About/About';
 import Detail from './pages/Detail/Detail';
+import Menu from './pages/Menu/Menu';
 import { Building } from './types/common';
 
 const routes = {
-  [PATH.menu]: <BuildingMenu />,
+  [PATH.menu]: <Menu />,
+  [PATH.about]: <About />,
   [PATH[Building.R]]: <Detail building={Building.R} />,
   [PATH[Building.K]]: <Detail building={Building.K} />,
   [PATH[Building.L]]: <Detail building={Building.L} />,

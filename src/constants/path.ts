@@ -1,8 +1,6 @@
 import { Building } from '../types/common';
 
-const PATH = {
-  root: '/',
-  menu: '/menu',
+export const BUILDING_PATH = {
   [Building.R]: '/r',
   [Building.K]: '/k',
   [Building.L]: '/l',
@@ -25,6 +23,13 @@ const PATH = {
   [Building.PG]: '/pg',
   [Building.YM]: '/ym',
   [Building.DD]: '/dd',
+};
+
+const PATH = {
+  root: '/',
+  menu: '/menu',
+  about: '/about',
+  ...BUILDING_PATH,
 };
 
 export default PATH;
