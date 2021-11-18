@@ -3,8 +3,8 @@ import React from 'react';
 import closeIconUrl from '../../assets/close.svg';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import { MESSAGE } from '../../constants/message';
-import useCreateComment from '../../hooks/useCreateComment';
 import useInput from '../../hooks/useInput';
+import useMutationComment from '../../hooks/useMutationComment';
 import { Building } from '../../types/common';
 import styles from './CommentEditor.module.css';
 
@@ -17,7 +17,7 @@ const CommentEditor = ({ building, onClose }: Props) => {
   const [text, onChangeText, setText] = useInput('');
   const [password, onChangePassword, setPassword] = useInput('', { numberOnly: true });
 
-  const { createComment, isLoading } = useCreateComment(building);
+  const { createComment, isLoading } = useMutationComment(building);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ const CommentEditor = ({ building, onClose }: Props) => {
       onClose();
     } catch (error: unknown) {
       console.error(error);
-      alert(MESSAGE.UNEXPECTED_ERROR);
+      alert(MESSAGE.CREATE_UNEXPECTED_ERROR);
     }
   };
   return (

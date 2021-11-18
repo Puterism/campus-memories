@@ -42,12 +42,53 @@
 }
 
 .commentItem {
-  border-bottom: 1px solid #ffffff;
+  border: 1px solid var(--primary-color);
+}
+
+.comment {
   background-color: #ffffff;
+  border-bottom: 1px solid var(--primary-color);
   color: var(--primary-color);
   padding: 1rem 1.25rem;
+  margin: 0;
   line-height: 30px;
-  border: 1px solid var(--primary-color);
+}
+
+.commentControl {
+  display: flex;
+}
+
+.commentControlInput {
+  width: auto;
+  min-width: 0;
+  height: 2rem;
+  line-height: 2rem;
+  padding: 0 20px;
+  font-size: 1.125rem;
+  flex: 1;
+  background-color: #ffffff;
+  border: none;
+  border-right: 1px solid var(--primary-color);
+}
+
+.commentControlInput::placeholder {
+  color: #92b3ff;
+  line-height: 2rem;
+  font-size: 1.125rem;
+}
+
+.commentControlButton {
+  height: 2rem;
+  padding: 0 20px;
+  flex: 1;
+  background-color: #92b3ff;
+  border: none;
+  border-right: 1px solid var(--primary-color);
+  cursor: pointer;
+}
+
+.commentControlButton:last-of-type {
+  border-right: none;
 }
 
 .detailItem {
