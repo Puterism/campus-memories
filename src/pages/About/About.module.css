@@ -23,5 +23,7 @@
 .article {
   margin: 1.875rem;
   font-size: 1.125rem;
-  line-height: 29px;
+  letter-spacing: -0.1pt;
+  line-height: 1.4;
+  word-break: keep-all;
 }
