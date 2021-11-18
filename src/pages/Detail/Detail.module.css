@@ -94,6 +94,10 @@
   border-right: none;
 }
 
+.commentControlButton:disabled {
+  cursor: default;
+}
+
 .detailItem {
   margin: 1.875rem;
   letter-spacing: -0.1pt;

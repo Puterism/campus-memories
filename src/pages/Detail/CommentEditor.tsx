@@ -65,6 +65,7 @@ const CommentEditor = ({ building, id, initialText, onClose }: Props) => {
 
     handleCreateComment();
   };
+
   return (
     <section className={styles.commentEditorContainer}>
       <div className={styles.header}>
@@ -93,7 +94,13 @@ const CommentEditor = ({ building, id, initialText, onClose }: Props) => {
           required
         />
         <button disabled={isCreating || isUpdating} className={styles.submitButton}>
-          {id ? '수정하기' : '기억 공유하기'}
+          {id
+            ? isUpdating
+              ? '수정 중...'
+              : '수정하기'
+            : isCreating
+            ? '공유하는 중...'
+            : '기억 공유하기'}
         </button>
       </form>
     </section>

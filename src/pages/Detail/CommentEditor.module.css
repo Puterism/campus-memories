@@ -51,3 +51,7 @@
   color: #fffd5c;
   cursor: pointer;
 }
+
+.submitButton:disabled {
+  cursor: default;
+}
