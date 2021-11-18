@@ -1,11 +1,38 @@
 .menuContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.menuHeader {
+  display: flex;
+  justify-content: space-between;
 }
 
 .menu {
   margin: 0;
   padding: 0;
   list-style: none;
+  min-height: 0;
+  overflow-y: auto;
+  background-color: #ffffff;
+  flex: 1;
 }
 
-.menuItem {
+.menuItemLink {
+  display: block;
+  height: 3rem;
+  line-height: 3rem;
+  padding: 0 1.25rem;
+  font-size: 1.375rem;
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.menu .menuItemLink {
+  border-bottom: 1px solid var(--primary-color);
+}
+
+.white {
+  color: #ffffff;
 }

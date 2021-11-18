@@ -1,4 +1,6 @@
+import cx from 'classnames';
 import { Link } from 'wouter';
+import closeIconUrl from '../../assets/close.svg';
 import { BUILDING } from '../../constants/building';
 import PATH from '../../constants/path';
 import styles from './Menu.module.css';
@@ -6,11 +8,20 @@ import styles from './Menu.module.css';
 const Menu = () => {
   return (
     <div className={styles.menuContainer}>
-      <Link to={PATH.about}>About</Link>
+      <div className={styles.menuHeader}>
+        <Link to={PATH.about} className={cx(styles.menuItemLink, styles.white)}>
+          About
+        </Link>
+        <Link to={PATH.root}>
+          <img src={closeIconUrl} alt="닫기" />
+        </Link>
+      </div>
       <ul className={styles.menu}>
         {Object.entries(BUILDING).map(([building, { name, path }]) => (
-          <li className={styles.menuItem} key={building}>
-            <Link to={path}>{name}</Link>
+          <li key={building}>
+            <Link to={path} className={styles.menuItemLink}>
+              {name}
+            </Link>
           </li>
         ))}
       </ul>
