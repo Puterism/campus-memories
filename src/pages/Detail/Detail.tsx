@@ -120,10 +120,11 @@ const Detail = ({ building }: Props) => {
                         inputMode="numeric"
                         value={password}
                         onChange={onChangePassword}
+                        disabled={isDeleting}
                         autoFocus
                         required
                       />
-                      <button className={styles.commentControlButton}>
+                      <button className={styles.commentControlButton} disabled={isDeleting}>
                         {isDeleting ? '삭제 중...' : '삭제'}
                       </button>
                     </form>
