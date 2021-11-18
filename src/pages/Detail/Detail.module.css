@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100%;
   color: #ffffff;
+  font-size: 1.125rem;
 }
 
 .header {
@@ -45,5 +46,6 @@
 }
 
 .detailItem {
-  padding: 0.5rem 1rem;
+  margin: 1.875rem;
+  line-height: 30px;
 }
