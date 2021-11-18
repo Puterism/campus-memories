@@ -8,7 +8,7 @@ import {
   DocumentData,
   Timestamp,
 } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { db } from '../firebase';
 import { Comment } from '../types/common';
 
@@ -30,9 +30,12 @@ const getResultListFromSnapshot = <T extends { id: string; createdAt: Date }>(
 };
 
 const useQueryComment = (building: Comment['building']) => {
+  const [isLoading, setLoading] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    setLoading(true);
+
     const q = query(
       collection(db, 'comment'),
       where('building', '==', building),
@@ -43,12 +46,13 @@ const useQueryComment = (building: Comment['building']) => {
       const result = getResultListFromSnapshot<Comment>(querySnapshot);
 
       setComments(result);
+      setLoading(false);
     });
 
     return unsubscribe;
   }, [building]);
 
-  return { comments };
+  return { comments, isLoading };
 };
 
 export default useQueryComment;

@@ -27,7 +27,7 @@ const Detail = ({ building }: Props) => {
     setCommentEditorOpen(false);
   };
 
-  const { comments } = useQueryComment(building);
+  const { comments, isLoading } = useQueryComment(building);
 
   return (
     <aside className={cx(appStyles.aside, { [appStyles.expended]: isCommentEditorOpen })}>
@@ -44,11 +44,12 @@ const Detail = ({ building }: Props) => {
             {detailContent[building]}
           </article>
           <ul className={styles.commentList}>
-            {comments.map(({ id, text }) => (
-              <li key={id} className={styles.commentItem}>
-                {text}
-              </li>
-            ))}
+            {!isLoading &&
+              comments.map(({ id, text }) => (
+                <li key={id} className={styles.commentItem}>
+                  {text}
+                </li>
+              ))}
           </ul>
         </section>
         <div className={styles.add}>
