@@ -1,0 +1,27 @@
+.container {
+  color: #ffffff;
+}
+
+.header {
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ffffff;
+}
+
+.dummy {
+  padding: 1.625rem;
+}
+
+.title {
+  margin: 0;
+  font-weight: normal;
+  font-size: 2rem;
+}
+
+.article {
+  margin: 1.875rem;
+  font-size: 1.125rem;
+  line-height: 29px;
+}

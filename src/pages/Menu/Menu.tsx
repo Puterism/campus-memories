@@ -10,10 +10,10 @@ const Menu = () => {
   return (
     <div className={styles.menuContainer}>
       <div className={styles.menuHeader}>
-        <Link to={PATH.about} className={cx(styles.menuItemLink, styles.white)}>
-          About
+        <Link to={PATH.about} className={cx(styles.menuItemLink, styles.about)}>
+          ABOUT
         </Link>
-        <LinkButton to={PATH.root} className={styles.closeLink}>
+        <LinkButton to={PATH.root}>
           <img src={closeIconUrl} alt="닫기" />
         </LinkButton>
       </div>

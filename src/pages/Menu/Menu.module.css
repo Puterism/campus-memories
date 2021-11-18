@@ -34,7 +34,8 @@
   border-bottom: 1px solid var(--primary-color);
 }
 
-.white {
+.about {
+  flex: 1;
   color: #ffffff;
 }
 

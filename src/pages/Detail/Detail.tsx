@@ -1,5 +1,7 @@
 import cx from 'classnames';
 import { Link } from 'react-router-dom';
+import closeIconUrl from '../../assets/close.svg';
+import LinkButton from '../../components/LinkButton/LinkButton';
 import { BUILDING } from '../../constants/building';
 import PATH from '../../constants/path';
 import useQueryComment from '../../hooks/useQueryComment';
@@ -7,7 +9,6 @@ import { Building } from '../../types/common';
 import styles from './Detail.module.css';
 import DetailForm from './DetailForm';
 import detailContent from './detailContent';
-
 interface Props {
   building: Building;
 }
@@ -18,9 +19,11 @@ const Detail = ({ building }: Props) => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <Link to={PATH.menu}>뒤로</Link>
+        <div className={styles.dummy} />
         <h2 className={styles.title}>{BUILDING[building].name}</h2>
-        <Link to={PATH.root}>닫기</Link>
+        <LinkButton to={PATH.root}>
+          <img src={closeIconUrl} alt="닫기" />
+        </LinkButton>
       </header>
       <section className={styles.content}>
         <article className={cx(styles.description, styles.detailItem)}>

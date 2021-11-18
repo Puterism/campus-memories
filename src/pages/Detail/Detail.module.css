@@ -6,10 +6,16 @@
 }
 
 .header {
+  height: 56px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0.5rem 1rem;
+  position: relative;
+  border-bottom: 1px solid #ffffff;
+}
+
+.dummy {
+  padding: 1.625rem;
 }
 
 .title {
