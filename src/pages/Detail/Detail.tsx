@@ -21,7 +21,7 @@ interface Props {
 
 const Detail = ({ building }: Props) => {
   const [isCommentEditorOpen, setCommentEditorOpen] = useState(false);
-  const [selectedCommentId, setSelectedCommentId] = useState<Comment['id'] | null>(null);
+  const [selectedComment, setSelectedComment] = useState<Comment | null>(null);
   const [isEditingComment, setEditingComment] = useState(false);
   const [isDeletingComment, setDeletingComment] = useState(false);
 
@@ -30,22 +30,24 @@ const Detail = ({ building }: Props) => {
   const { deleteComment, isDeleting } = useMutationComment(building);
 
   const initForm = () => {
-    setSelectedCommentId(null);
+    setSelectedComment(null);
     setDeletingComment(false);
     setEditingComment(false);
     setPassword('');
   };
 
   const openCommentEditor = () => {
+    initForm();
     setCommentEditorOpen(true);
   };
 
   const closeCommentEditor = () => {
+    initForm();
     setCommentEditorOpen(false);
   };
 
-  const selectComment = (id: Comment['id']) => {
-    if (selectedCommentId === id) {
+  const selectComment = (comment: Comment) => {
+    if (selectedComment?.id === comment.id) {
       initForm();
 
       return;
@@ -53,16 +55,21 @@ const Detail = ({ building }: Props) => {
 
     setDeletingComment(false);
     setEditingComment(false);
-    setSelectedCommentId(id);
+    setSelectedComment(comment);
+  };
+
+  const startEditComment = () => {
+    setEditingComment(true);
+    setCommentEditorOpen(true);
   };
 
   const handleDeleteComment = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!isDeletingComment || !selectedCommentId) return;
+    if (!isDeletingComment || !selectedComment) return;
 
     try {
-      await deleteComment(selectedCommentId, password);
+      await deleteComment(selectedComment.id, password);
 
       initForm();
     } catch (error: unknown) {
@@ -91,14 +98,18 @@ const Detail = ({ building }: Props) => {
           </article>
           <ul className={styles.commentList}>
             {!isLoading &&
-              comments.map(({ id, text }) => (
-                <li key={id} className={styles.commentItem}>
-                  <p className={styles.comment} onClick={() => selectComment(id)}>
-                    {text}
+              comments.map((comment) => (
+                <li key={comment.id} className={styles.commentItem}>
+                  <p className={styles.comment} onClick={() => selectComment(comment)}>
+                    {comment.text}
                   </p>
-                  {selectedCommentId === id && !(isDeletingComment || isEditingComment) && (
+                  {selectedComment?.id === comment.id && !(isDeletingComment || isEditingComment) && (
                     <div className={styles.commentControl}>
-                      <button type="button" className={styles.commentControlButton}>
+                      <button
+                        type="button"
+                        className={styles.commentControlButton}
+                        onClick={() => startEditComment()}
+                      >
                         수정
                       </button>
                       <button
@@ -110,7 +121,7 @@ const Detail = ({ building }: Props) => {
                       </button>
                     </div>
                   )}
-                  {selectedCommentId === id && isDeletingComment && (
+                  {selectedComment?.id === comment.id && isDeletingComment && (
                     <form className={styles.commentControl} onSubmit={handleDeleteComment}>
                       <input
                         type="password"
@@ -139,7 +150,17 @@ const Detail = ({ building }: Props) => {
           </LinkButton>
         </div>
       </div>
-      {isCommentEditorOpen && <CommentEditor building={building} onClose={closeCommentEditor} />}
+      {isCommentEditorOpen && !isEditingComment && (
+        <CommentEditor building={building} onClose={closeCommentEditor} />
+      )}
+      {isCommentEditorOpen && isEditingComment && selectedComment && (
+        <CommentEditor
+          building={building}
+          id={selectedComment.id}
+          initialText={selectedComment.text}
+          onClose={closeCommentEditor}
+        />
+      )}
     </aside>
   );
 };

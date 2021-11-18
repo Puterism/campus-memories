@@ -5,28 +5,24 @@ import LinkButton from '../../components/LinkButton/LinkButton';
 import { MESSAGE } from '../../constants/message';
 import useInput from '../../hooks/useInput';
 import useMutationComment from '../../hooks/useMutationComment';
-import { Building } from '../../types/common';
+import { Building, Comment } from '../../types/common';
 import styles from './CommentEditor.module.css';
 
 interface Props {
   building: Building;
+  id?: Comment['id'];
+  initialText?: Comment['text'];
   onClose: () => void;
 }
 
-const CommentEditor = ({ building, onClose }: Props) => {
-  const [text, onChangeText, setText] = useInput('');
+const CommentEditor = ({ building, id, initialText, onClose }: Props) => {
+  const [text, onChangeText, setText] = useInput(initialText ?? '');
   const [password, onChangePassword, setPassword] = useInput('', { numberOnly: true });
+  const { createComment, updateComment, isCreating, isUpdating } = useMutationComment(building);
 
-  const { createComment, isCreating } = useMutationComment(building);
+  const trimmedText = text.trim();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const trimmedText = text.trim();
-
-    if (trimmedText.length === 0) return;
-    if (password.length !== 4) return;
-
+  const handleCreateComment = async () => {
     try {
       await createComment(trimmedText, password);
 
@@ -37,6 +33,37 @@ const CommentEditor = ({ building, onClose }: Props) => {
       console.error(error);
       alert(MESSAGE.CREATE_UNEXPECTED_ERROR);
     }
+  };
+
+  const handleUpdateComment = async () => {
+    if (!id) return;
+
+    try {
+      await updateComment(id, trimmedText, password);
+
+      setText('');
+      setPassword('');
+      onClose();
+    } catch (error: unknown) {
+      console.error(error);
+      alert((error as Error).message ?? MESSAGE.UPDATE_UNEXPECTED_ERROR);
+
+      setPassword('');
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (trimmedText.length === 0 || password.length !== 4) return;
+
+    if (id) {
+      handleUpdateComment();
+
+      return;
+    }
+
+    handleCreateComment();
   };
   return (
     <section className={styles.commentEditorContainer}>
@@ -51,7 +78,7 @@ const CommentEditor = ({ building, onClose }: Props) => {
           placeholder="당신의 기억을 공유해주세요"
           value={text}
           onChange={onChangeText}
-          disabled={isCreating}
+          disabled={isCreating || isUpdating}
           autoFocus
           required
         />
@@ -65,8 +92,8 @@ const CommentEditor = ({ building, onClose }: Props) => {
           onChange={onChangePassword}
           required
         />
-        <button disabled={isCreating} className={styles.submitButton}>
-          {isCreating ? '잠시만 기다려주세요' : '기억 공유하기'}
+        <button disabled={isCreating || isUpdating} className={styles.submitButton}>
+          {id ? '수정하기' : '기억 공유하기'}
         </button>
       </form>
     </section>

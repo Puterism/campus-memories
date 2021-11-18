@@ -5,6 +5,7 @@ import { Building, Comment } from '../types/common';
 
 const useMutationComment = (building: Building) => {
   const [isCreating, setCreating] = useState(false);
+  const [isUpdating, setUpdating] = useState(false);
   const [isDeleting, setDeleting] = useState(false);
 
   const createComment = async (text: Comment['text'], password: string) => {
@@ -25,6 +26,24 @@ const useMutationComment = (building: Building) => {
     }
   };
 
+  const updateComment = async (id: Comment['id'], text: Comment['text'], password: string) => {
+    if (isUpdating) return;
+
+    setUpdating(true);
+
+    const updateCommentFunctions = httpsCallable(functions, 'updateComment');
+
+    try {
+      await updateCommentFunctions({
+        id,
+        text,
+        password,
+      });
+    } finally {
+      setUpdating(false);
+    }
+  };
+
   const deleteComment = async (id: Comment['id'], password: string) => {
     if (isDeleting) return;
 
@@ -42,7 +61,7 @@ const useMutationComment = (building: Building) => {
     }
   };
 
-  return { createComment, deleteComment, isCreating, isDeleting };
+  return { createComment, updateComment, deleteComment, isCreating, isUpdating, isDeleting };
 };
 
 export default useMutationComment;

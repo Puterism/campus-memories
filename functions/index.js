@@ -30,6 +30,33 @@ exports.createComment = functions.region('asia-northeast3').https.onCall(async (
     });
 });
 
+exports.updateComment = functions.region('asia-northeast3').https.onCall(async (data) => {
+  const { id, text, password } = data;
+
+  const doc = await admin.firestore().collection('comment').doc(id).get();
+  const docData = doc.data();
+
+  const hash = docData.password;
+
+  const result = await bcrypt.compare(password, hash);
+
+  if (!result) {
+    throw new functions.https.HttpsError('unauthenticated', '비밀번호를 다시 확인해주세요.');
+  }
+
+  return admin
+    .firestore()
+    .collection('comment')
+    .doc(id)
+    .update({
+      text,
+    })
+    .catch((error) => {
+      console.error('Error update comment: ', error);
+      throw new functions.https.HttpsError('internal', error);
+    });
+});
+
 exports.deleteComment = functions.region('asia-northeast3').https.onCall(async (data) => {
   const { id, password } = data;
 
