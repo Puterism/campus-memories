@@ -4,11 +4,13 @@ import { functions } from '../firebase';
 import { Building, Comment } from '../types/common';
 
 const useMutationComment = (building: Building) => {
-  const [isLoading, setLoading] = useState(false);
+  const [isCreating, setCreating] = useState(false);
   const [isDeleting, setDeleting] = useState(false);
 
   const createComment = async (text: Comment['text'], password: string) => {
-    setLoading(true);
+    if (isCreating) return;
+
+    setCreating(true);
 
     const createCommentFunctions = httpsCallable(functions, 'createComment');
 
@@ -19,11 +21,13 @@ const useMutationComment = (building: Building) => {
         password,
       });
     } finally {
-      setLoading(false);
+      setCreating(false);
     }
   };
 
   const deleteComment = async (id: Comment['id'], password: string) => {
+    if (isDeleting) return;
+
     setDeleting(true);
 
     const deleteCommentFunctions = httpsCallable(functions, 'deleteComment');
@@ -38,7 +42,7 @@ const useMutationComment = (building: Building) => {
     }
   };
 
-  return { createComment, deleteComment, isLoading, isDeleting };
+  return { createComment, deleteComment, isCreating, isDeleting };
 };
 
 export default useMutationComment;

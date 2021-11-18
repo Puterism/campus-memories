@@ -17,7 +17,7 @@ const CommentEditor = ({ building, onClose }: Props) => {
   const [text, onChangeText, setText] = useInput('');
   const [password, onChangePassword, setPassword] = useInput('', { numberOnly: true });
 
-  const { createComment, isLoading } = useMutationComment(building);
+  const { createComment, isCreating } = useMutationComment(building);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,7 +51,7 @@ const CommentEditor = ({ building, onClose }: Props) => {
           placeholder="당신의 기억을 공유해주세요"
           value={text}
           onChange={onChangeText}
-          disabled={isLoading}
+          disabled={isCreating}
           autoFocus
           required
         />
@@ -65,8 +65,8 @@ const CommentEditor = ({ building, onClose }: Props) => {
           onChange={onChangePassword}
           required
         />
-        <button disabled={isLoading} className={styles.submitButton}>
-          {isLoading ? '잠시만 기다려주세요' : '기억 공유하기'}
+        <button disabled={isCreating} className={styles.submitButton}>
+          {isCreating ? '잠시만 기다려주세요' : '기억 공유하기'}
         </button>
       </form>
     </section>
