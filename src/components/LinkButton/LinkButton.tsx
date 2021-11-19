@@ -15,7 +15,7 @@ const LinkButton = ({ to, children, className, ...props }: Props) => {
   }
 
   return (
-    <button type="button" className={styles.linkButton} {...props}>
+    <button type="button" className={cx(styles.linkButton, className)} {...props}>
       {children}
     </button>
   );
