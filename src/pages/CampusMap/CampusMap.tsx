@@ -24,7 +24,7 @@ const CampusMap = () => {
   const containerRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  const { isMoved, onMouseDown, onMouseMove, onMouseUp } = useMapMove({
+  const { isMoving, isMoved, onMouseDown, onMouseMove, onMouseUp } = useMapMove({
     mapStatusState: [mapStatus, setMapStatus],
     svgRef,
     containerRef,
@@ -52,6 +52,7 @@ const CampusMap = () => {
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
         onWheel={onWheel}
+        cursor={isMoving ? 'grabbing' : 'grab'}
       >
         <g
           transform={`matrix(${mapStatus.scale}, 0, 0, ${mapStatus.scale}, ${mapStatus.x}, ${mapStatus.y})`}
