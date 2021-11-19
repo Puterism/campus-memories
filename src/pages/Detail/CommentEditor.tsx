@@ -92,6 +92,7 @@ const CommentEditor = ({ building, id, initialText, onClose }: Props) => {
           inputMode="numeric"
           value={password}
           onChange={onChangePassword}
+          disabled={isCreating || isUpdating}
           required
         />
         <button disabled={isCreating || isUpdating} className={styles.submitButton}>
