@@ -12,6 +12,7 @@
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
   position: relative;
+  z-index: 2;
 }
 
 .expended {
@@ -19,8 +20,4 @@
   min-width: 600px;
   max-width: 1000px;
   width: 60%;
-}
-
-.mapContainer {
-  flex: 1;
 }

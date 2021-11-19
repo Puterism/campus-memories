@@ -16,7 +16,9 @@ export enum Building {
   DORM = 'DORM', // 제2기숙사,
   T = 'T',
   S = 'S',
-  Z = 'Z',
+  Z1 = 'Z1',
+  Z2Z3 = 'Z2Z3',
+  Z4 = 'Z4',
   M = 'M',
   PG = 'PG', // 운동장,
   YM = 'YM', // 영원한 미소,
@@ -28,4 +30,17 @@ export interface Comment {
   text: string;
   building: Building;
   createdAt: Date;
+}
+
+export interface Coordinate {
+  x: number;
+  y: number;
+}
+
+export interface MapStatus {
+  scale: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }

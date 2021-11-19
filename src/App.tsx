@@ -1,18 +1,14 @@
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import styles from './App.module.css';
 import AsideRoutes from './AsideRoutes';
-import PATH from './constants/path';
+import CampusMap from './pages/CampusMap/CampusMap';
 
 const App = () => {
   return (
     <BrowserRouter>
       <div className={styles.app}>
         <AsideRoutes />
-        <section className={styles.mapContainer}>
-          {Object.entries(PATH).map(([building, path]) => (
-            <Link to={path}>{building}</Link>
-          ))}
-        </section>
+        <CampusMap />
       </div>
     </BrowserRouter>
   );

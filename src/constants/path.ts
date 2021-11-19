@@ -1,6 +1,6 @@
 import { Building } from '../types/common';
 
-export const BUILDING_PATH = {
+export const BUILDING_PATH: Record<Building, string> = {
   [Building.R]: '/r',
   [Building.K]: '/k',
   [Building.L]: '/l',
@@ -18,7 +18,9 @@ export const BUILDING_PATH = {
   [Building.DORM]: '/dorm',
   [Building.T]: '/t',
   [Building.S]: '/s',
-  [Building.Z]: '/z',
+  [Building.Z1]: '/z',
+  [Building.Z2Z3]: '/z',
+  [Building.Z4]: '/z',
   [Building.M]: '/m',
   [Building.PG]: '/pg',
   [Building.YM]: '/ym',

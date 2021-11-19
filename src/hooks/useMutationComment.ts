@@ -3,7 +3,11 @@ import { useState } from 'react';
 import { functions } from '../firebase';
 import { Building, Comment } from '../types/common';
 
-const useMutationComment = (building: Building) => {
+const useMutationComment = (building: Building | 'Z') => {
+  if (building === Building.Z1 || building === Building.Z2Z3 || building === Building.Z4) {
+    building = 'Z';
+  }
+
   const [isCreating, setCreating] = useState(false);
   const [isUpdating, setUpdating] = useState(false);
   const [isDeleting, setDeleting] = useState(false);

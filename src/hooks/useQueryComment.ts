@@ -10,7 +10,7 @@ import {
 } from 'firebase/firestore';
 import { useLayoutEffect, useState } from 'react';
 import { db } from '../firebase';
-import { Comment } from '../types/common';
+import { Building, Comment } from '../types/common';
 
 const getResultListFromSnapshot = <T extends { id: string; createdAt: Date }>(
   querySnapshot: QuerySnapshot<DocumentData>
@@ -29,7 +29,11 @@ const getResultListFromSnapshot = <T extends { id: string; createdAt: Date }>(
   return result;
 };
 
-const useQueryComment = (building: Comment['building']) => {
+const useQueryComment = (building: Building | 'Z') => {
+  if (building === Building.Z1 || building === Building.Z2Z3 || building === Building.Z4) {
+    building = 'Z';
+  }
+
   const [isLoading, setLoading] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
 

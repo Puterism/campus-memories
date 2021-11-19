@@ -1,6 +1,11 @@
 import { Building } from '../types/common';
 
-export const BUILDING = {
+interface BuildingInfo {
+  name: string;
+  path: string;
+}
+
+export const BUILDING: Record<Building, BuildingInfo> = {
   [Building.R]: {
     name: 'R 홍문관',
     path: '/r',
@@ -69,7 +74,15 @@ export const BUILDING = {
     name: 'S 신축강당',
     path: '/s',
   },
-  [Building.Z]: {
+  [Building.Z1]: {
+    name: 'Z 강의동',
+    path: '/z',
+  },
+  [Building.Z2Z3]: {
+    name: 'Z 강의동',
+    path: '/z',
+  },
+  [Building.Z4]: {
     name: 'Z 강의동',
     path: '/z',
   },

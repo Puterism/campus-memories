@@ -1,0 +1,13 @@
+.campusMapContainer {
+  flex: 1;
+}
+
+.logo {
+  position: fixed;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 1rem;
+  z-index: 1;
+  pointer-events: none;
+}
