@@ -1,6 +1,5 @@
 import imageABCD from '../assets/images/ABCD.png';
 import imageDD from '../assets/images/DD.png';
-import imageDORM from '../assets/images/DORM.png';
 import imageE from '../assets/images/E.png';
 import imageF from '../assets/images/F.png';
 import imageG from '../assets/images/G.png';
@@ -22,6 +21,7 @@ import imageYM from '../assets/images/YM.png';
 import imageZ1 from '../assets/images/Z1.png';
 import imageZ2Z3 from '../assets/images/Z2Z3.png';
 import imageZ4 from '../assets/images/Z4.png';
+import imageDORM from '../assets/images/dorm.png';
 
 import { Building } from '../types/common';
 
