@@ -1,8 +1,11 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import imageLogo from '../../assets/images/logo.png';
+import menuIconUrl from '../../assets/menu.svg';
+import LinkButton from '../../components/LinkButton/LinkButton';
 import { BUILDING } from '../../constants/building';
 import CAMPUS_MAP from '../../constants/campusMap';
+import PATH from '../../constants/path';
 import SVG_DATA from '../../constants/svgData';
 import useMapMove from '../../hooks/useMapMove';
 import useMapScale from '../../hooks/useMapScale';
@@ -42,6 +45,9 @@ const CampusMap = () => {
 
   return (
     <section className={styles.campusMapContainer} ref={containerRef}>
+      <LinkButton to={PATH.menu} className={styles.menuButton}>
+        <img src={menuIconUrl} alt="메뉴" />
+      </LinkButton>
       <img src={imageLogo} alt="Hongik Memories" className={styles.logo} />
       <svg
         xmlns="http://www.w3.org/2000/svg"

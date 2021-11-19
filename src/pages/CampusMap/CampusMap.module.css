@@ -11,3 +11,10 @@
   z-index: 1;
   pointer-events: none;
 }
+
+.menuButton {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 1;
+}
