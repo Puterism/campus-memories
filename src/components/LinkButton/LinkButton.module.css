@@ -1,7 +1,7 @@
 .linkButton {
   width: 0;
   height: 0;
-  background: var(--primary-color);
+  background: none;
   color: var(--primary-color);
   display: inline-flex;
   justify-content: center;
@@ -9,4 +9,8 @@
   padding: 1.625rem;
   border: none;
   cursor: pointer;
+}
+
+.colored {
+  background-color: var(--primary-color);
 }

@@ -60,17 +60,17 @@ const CampusMap = () => {
 
   return (
     <section className={styles.campusMapContainer} ref={containerRef}>
-      <LinkButton to={PATH.menu} className={styles.menuButton}>
+      <LinkButton to={PATH.menu} className={styles.menuButton} colored>
         <img src={menuIconUrl} alt="메뉴" />
       </LinkButton>
-      <LinkButton className={styles.shareButton} onClick={handleClickShare}>
+      <LinkButton className={styles.shareButton} onClick={handleClickShare} colored>
         <img src={shareIconUrl} alt="링크 공유" />
       </LinkButton>
       <div className={styles.zoomControl}>
-        <LinkButton onClick={zoomIn}>
+        <LinkButton onClick={zoomIn} colored>
           <img src={plusIconUrl} alt="확대" />
         </LinkButton>
-        <LinkButton onClick={zoomOut}>
+        <LinkButton onClick={zoomOut} colored>
           <img src={minusIconUrl} alt="축소" />
         </LinkButton>
       </div>

@@ -3,19 +3,31 @@ import { ButtonHTMLAttributes } from 'react';
 import { Link, LinkProps } from 'react-router-dom';
 import styles from './LinkButton.module.css';
 
-type Props = Partial<LinkProps> & ButtonHTMLAttributes<HTMLButtonElement>;
+type Attributes = Partial<LinkProps> & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const LinkButton = ({ to, children, className, ...props }: Props) => {
+interface Props extends Attributes {
+  colored?: boolean;
+}
+
+const LinkButton = ({ to, children, className, colored = false, ...props }: Props) => {
   if (to) {
     return (
-      <Link to={to} className={cx(styles.linkButton, className)} {...props}>
+      <Link
+        to={to}
+        className={cx(styles.linkButton, className, { [styles.colored]: colored })}
+        {...props}
+      >
         {children}
       </Link>
     );
   }
 
   return (
-    <button type="button" className={cx(styles.linkButton, className)} {...props}>
+    <button
+      type="button"
+      className={cx(styles.linkButton, className, { [styles.colored]: colored })}
+      {...props}
+    >
       {children}
     </button>
   );
