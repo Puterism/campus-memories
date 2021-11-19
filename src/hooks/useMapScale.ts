@@ -24,6 +24,8 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
 
       const nextScale = scale - deltaY * CAMPUS_MAP.SCALE_DELTA;
 
+      console.log(nextScale, scale, deltaY, CAMPUS_MAP.SCALE_DELTA);
+
       if (nextScale <= initialScale) {
         return {
           ...prevStatus,
@@ -56,6 +58,59 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
     });
   };
 
+  const zoomIn = () => {
+    const SCALE_DELTA = 0.5;
+
+    setMapStatus((prevStatus) => {
+      if (!containerRef.current) return prevStatus;
+
+      const { scale, x, y, width, height } = prevStatus;
+
+      const nextScale =
+        scale + SCALE_DELTA >= CAMPUS_MAP.MAX_SCALE ? CAMPUS_MAP.MAX_SCALE : scale + SCALE_DELTA;
+
+      const widthDiff = Math.abs(width * nextScale - width * scale) / 2;
+      const heightDiff = Math.abs(height * nextScale - height * scale) / 2;
+
+      const nextX = x - widthDiff;
+      const nextY = y - heightDiff;
+
+      return {
+        ...prevStatus,
+        x: nextX <= 0 ? nextX : 0,
+        y: nextY <= 0 ? nextY : 0,
+        scale: nextScale,
+      };
+    });
+  };
+
+  const zoomOut = () => {
+    if (!initialScale) return;
+
+    const SCALE_DELTA = 0.5;
+
+    setMapStatus((prevStatus) => {
+      if (!containerRef.current) return prevStatus;
+
+      const { scale, x, y, width, height } = prevStatus;
+
+      const nextScale = scale - SCALE_DELTA < initialScale ? initialScale : scale - SCALE_DELTA;
+
+      const widthDiff = Math.abs(width * nextScale - width * scale) / 2;
+      const heightDiff = Math.abs(height * nextScale - height * scale) / 2;
+
+      const nextX = x + widthDiff;
+      const nextY = y + heightDiff;
+
+      return {
+        ...prevStatus,
+        x: nextX <= 0 ? nextX : 0,
+        y: nextY <= 0 ? nextY : 0,
+        scale: nextScale < initialScale ? initialScale : nextScale,
+      };
+    });
+  };
+
   useLayoutEffect(() => {
     if (!containerRef.current) return;
 
@@ -81,7 +136,7 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
     setInitialScale(nextScale);
   }, [containerRef, windowSize]);
 
-  return { onWheel };
+  return { onWheel, zoomIn, zoomOut };
 };
 
 export default useMapScale;

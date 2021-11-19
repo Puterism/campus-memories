@@ -2,6 +2,8 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import imageLogo from '../../assets/images/logo.png';
 import menuIconUrl from '../../assets/menu.svg';
+import minusIconUrl from '../../assets/minus.svg';
+import plusIconUrl from '../../assets/plus.svg';
 import shareIconUrl from '../../assets/share.svg';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import { BUILDING } from '../../constants/building';
@@ -34,7 +36,7 @@ const CampusMap = () => {
     svgRef,
     containerRef,
   });
-  const { onWheel } = useMapScale({
+  const { zoomIn, zoomOut, onWheel } = useMapScale({
     mapStatusState: [mapStatus, setMapStatus],
     containerRef,
   });
@@ -61,10 +63,18 @@ const CampusMap = () => {
       <LinkButton to={PATH.menu} className={styles.menuButton}>
         <img src={menuIconUrl} alt="메뉴" />
       </LinkButton>
-      <img src={imageLogo} alt="Hongik Memories" className={styles.logo} />
       <LinkButton className={styles.shareButton} onClick={handleClickShare}>
         <img src={shareIconUrl} alt="링크 공유" />
       </LinkButton>
+      <div className={styles.zoomControl}>
+        <LinkButton onClick={zoomIn}>
+          <img src={plusIconUrl} alt="확대" />
+        </LinkButton>
+        <LinkButton onClick={zoomOut}>
+          <img src={minusIconUrl} alt="축소" />
+        </LinkButton>
+      </div>
+      <img src={imageLogo} alt="Hongik Memories" className={styles.logo} />
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
