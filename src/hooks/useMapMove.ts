@@ -11,12 +11,16 @@ const useMapMove = ({ mapStatusState, svgRef, containerRef }: Params) => {
   const [mapStatus, setMapStatus] = mapStatusState;
 
   const [isMoving, setMoving] = useState(false);
+  const [isMoved, setMoved] = useState(false);
+  const [movingCount, setMovingCount] = useState(0);
   const [dragOffset, setDragOffset] = useState<Coordinate | null>(null);
 
   const onMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
     const { clientX, clientY } = event;
 
     setMoving(true);
+    setMoved(false);
+    setMovingCount(0);
     setDragOffset({ x: clientX - mapStatus.x, y: clientY - mapStatus.y });
   };
 
@@ -57,6 +61,10 @@ const useMapMove = ({ mapStatusState, svgRef, containerRef }: Params) => {
         y: nextY,
       };
     });
+
+    setMovingCount((prevCount) => prevCount + 1);
+
+    if (movingCount > 5) setMoved(true);
   };
 
   const onMouseUp = () => {
@@ -69,7 +77,7 @@ const useMapMove = ({ mapStatusState, svgRef, containerRef }: Params) => {
     setDragOffset(null);
   };
 
-  return { onMouseDown, onMouseMove, onMouseUp, onMouseOut };
+  return { isMoving, isMoved, onMouseDown, onMouseMove, onMouseUp, onMouseOut };
 };
 
 export default useMapMove;

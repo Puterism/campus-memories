@@ -24,7 +24,7 @@ const CampusMap = () => {
   const containerRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  const { onMouseDown, onMouseMove, onMouseUp } = useMapMove({
+  const { isMoved, onMouseDown, onMouseMove, onMouseUp } = useMapMove({
     mapStatusState: [mapStatus, setMapStatus],
     svgRef,
     containerRef,
@@ -33,6 +33,12 @@ const CampusMap = () => {
     mapStatusState: [mapStatus, setMapStatus],
     containerRef,
   });
+
+  const handleClickBuilding = (building: Building) => {
+    if (isMoved) return;
+
+    navigate(BUILDING[building].path);
+  };
 
   return (
     <section className={styles.campusMapContainer} ref={containerRef}>
@@ -56,7 +62,7 @@ const CampusMap = () => {
             <BuildingImage
               key={building}
               building={building}
-              onClick={() => navigate(BUILDING[building as Building].path)}
+              onClick={() => handleClickBuilding(building as Building)}
               {...data}
             />
           ))}
