@@ -10,10 +10,12 @@ interface Params {
 
 const useMapScale = ({ mapStatusState, containerRef }: Params) => {
   const [, setMapStatus] = mapStatusState;
-  const [initialScale, setInitialScale] = useState(1);
+  const [initialScale, setInitialScale] = useState<number | null>(null);
   const windowSize = useWindowSize();
 
   const onWheel = (event: React.WheelEvent<SVGSVGElement>) => {
+    if (initialScale === null) return;
+
     setMapStatus((prevStatus) => {
       if (!containerRef.current) return prevStatus;
 
@@ -62,12 +64,22 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
       containerRef.current.offsetHeight / CAMPUS_MAP.MAP_HEIGHT
     );
 
-    setInitialScale(nextScale);
     setMapStatus((prevStatus) => ({
       ...prevStatus,
       scale: nextScale,
     }));
-  }, [containerRef, setMapStatus, windowSize]);
+  }, [containerRef, setMapStatus]);
+
+  useLayoutEffect(() => {
+    if (!containerRef.current) return;
+
+    const nextScale = Math.max(
+      containerRef.current.offsetWidth / CAMPUS_MAP.MAP_WIDTH,
+      containerRef.current.offsetHeight / CAMPUS_MAP.MAP_HEIGHT
+    );
+
+    setInitialScale(nextScale);
+  }, [containerRef, windowSize]);
 
   return { onWheel };
 };
