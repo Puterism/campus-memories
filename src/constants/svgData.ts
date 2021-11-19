@@ -180,7 +180,7 @@ const SVG_DATA: Record<Building, BuildingSVGData> = {
     transform: 'translate(1244 609)',
     width: 287,
     height: 89,
-    d: 'M0.0,0.0 L0.0,31.0 L295.999,31.0 L295.999,0.999 L0.0,0.0 Z',
+    d: 'M0.0,37.0 L0.0,70.0 L295.999,70.0 L295.999,37.0 L0.0,37.0 Z',
     xlinkHref: imageDD,
   },
   [Building.S]: {
