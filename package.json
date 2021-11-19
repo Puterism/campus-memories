@@ -4,7 +4,7 @@
   "author": "Shim MunSeong <Puterism.K@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "serve": "vite preview",
     "predeploy": "yarn && tsc && vite build",
