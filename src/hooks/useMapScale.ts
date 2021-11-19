@@ -8,7 +8,7 @@ interface Params {
   containerRef: React.RefObject<HTMLElement>;
 }
 
-const useMapScale = ({ mapStatusState }: Params) => {
+const useMapScale = ({ mapStatusState, containerRef }: Params) => {
   const [, setMapStatus] = mapStatusState;
   const [initialScale, setInitialScale] = useState(1);
   const windowSize = useWindowSize();
@@ -53,14 +53,19 @@ const useMapScale = ({ mapStatusState }: Params) => {
   };
 
   useLayoutEffect(() => {
-    const nextScale = windowSize.height / CAMPUS_MAP.MAP_HEIGHT;
+    if (!containerRef.current) return;
+
+    const nextScale = Math.max(
+      containerRef.current.offsetWidth / CAMPUS_MAP.MAP_WIDTH,
+      containerRef.current.offsetHeight / CAMPUS_MAP.MAP_HEIGHT
+    );
 
     setInitialScale(nextScale);
     setMapStatus((prevStatus) => ({
       ...prevStatus,
       scale: nextScale,
     }));
-  }, [setMapStatus, windowSize]);
+  }, [containerRef, setMapStatus, windowSize]);
 
   return { onWheel };
 };
