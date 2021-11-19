@@ -24,8 +24,6 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
 
       const nextScale = scale - deltaY * CAMPUS_MAP.SCALE_DELTA;
 
-      console.log(nextScale, scale, deltaY, CAMPUS_MAP.SCALE_DELTA);
-
       if (nextScale <= initialScale) {
         return {
           ...prevStatus,
