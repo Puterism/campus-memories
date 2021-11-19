@@ -15,6 +15,8 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
 
   const onWheel = (event: React.WheelEvent<SVGSVGElement>) => {
     setMapStatus((prevStatus) => {
+      if (!containerRef.current) return prevStatus;
+
       const { clientX, clientY, deltaY } = event;
       const { scale, x, y, width, height } = prevStatus;
 
@@ -34,7 +36,7 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
         };
       }
 
-      const cursorX = (clientX - x) / (width * scale);
+      const cursorX = (clientX - x - containerRef.current.offsetLeft) / (width * scale);
       const cursorY = (clientY - y) / (height * scale);
 
       const widthDiff = Math.abs(width * nextScale - width * scale) * cursorX;
