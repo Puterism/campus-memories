@@ -5,6 +5,7 @@ import closeWhiteUrl from '../../assets/close_white.svg';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import { BUILDING } from '../../constants/building';
 import PATH from '../../constants/path';
+import { Building } from '../../types/common';
 import styles from './Menu.module.css';
 
 const Menu = () => {
@@ -20,13 +21,19 @@ const Menu = () => {
           </LinkButton>
         </div>
         <ul className={styles.menu}>
-          {Object.entries(BUILDING).map(([building, { name, path }]) => (
-            <li key={building}>
-              <Link to={path} className={styles.menuItemLink}>
-                {name}
-              </Link>
-            </li>
-          ))}
+          {Object.entries(BUILDING).map(([building, { name, path }]) => {
+            if (building === Building.Z2Z3 || building === Building.Z4) {
+              return false;
+            }
+
+            return (
+              <li key={building}>
+                <Link to={path} className={styles.menuItemLink}>
+                  {name}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </aside>
