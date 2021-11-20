@@ -13,6 +13,8 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
   const [initialScale, setInitialScale] = useState<number | null>(null);
   const windowSize = useWindowSize();
 
+  const maxScale = (initialScale ?? 1) * 2;
+
   const onWheel = (event: React.WheelEvent<SVGSVGElement>) => {
     if (initialScale === null) return;
 
@@ -22,21 +24,10 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
       const { clientX, clientY, deltaY } = event;
       const { scale, x, y, width, height } = prevStatus;
 
-      const nextScale = scale - deltaY * CAMPUS_MAP.SCALE_DELTA;
+      let nextScale = scale - deltaY * CAMPUS_MAP.SCALE_DELTA;
 
-      if (nextScale <= initialScale) {
-        return {
-          ...prevStatus,
-          scale: initialScale,
-        };
-      }
-
-      if (nextScale >= CAMPUS_MAP.MAX_SCALE) {
-        return {
-          ...prevStatus,
-          scale: CAMPUS_MAP.MAX_SCALE,
-        };
-      }
+      if (nextScale <= initialScale) nextScale = initialScale;
+      else if (nextScale >= maxScale) nextScale = maxScale;
 
       const cursorX = (clientX - x - containerRef.current.offsetLeft) / (width * scale);
       const cursorY = (clientY - y) / (height * scale);
@@ -44,13 +35,24 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
       const widthDiff = Math.abs(width * nextScale - width * scale) * cursorX;
       const heightDiff = Math.abs(height * nextScale - height * scale) * cursorY;
 
-      const nextX = nextScale > scale ? x - widthDiff : x + widthDiff;
-      const nextY = nextScale > scale ? y - heightDiff : y + heightDiff;
+      let nextX = nextScale > scale ? x - widthDiff : x + widthDiff;
+      let nextY = nextScale > scale ? y - heightDiff : y + heightDiff;
+
+      const minX = containerRef.current.offsetWidth - width * nextScale;
+      const minY = containerRef.current.offsetHeight - height * nextScale;
+
+      // 왼쪽 위에 여백이 생기는 상황
+      if (nextX >= 0) nextX = 0;
+      if (nextY >= 0) nextY = 0;
+
+      // 오른쪽 아래에 여백이 생기는 상황
+      if (nextX < minX) nextX = minX;
+      if (nextY < minY) nextY = minY;
 
       return {
         ...prevStatus,
-        x: nextX <= 0 ? nextX : 0,
-        y: nextY <= 0 ? nextY : 0,
+        x: nextX,
+        y: nextY,
         scale: nextScale,
       };
     });
@@ -64,8 +66,7 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
 
       const { scale, x, y, width, height } = prevStatus;
 
-      const nextScale =
-        scale + SCALE_DELTA >= CAMPUS_MAP.MAX_SCALE ? CAMPUS_MAP.MAX_SCALE : scale + SCALE_DELTA;
+      const nextScale = scale + SCALE_DELTA >= maxScale ? maxScale : scale + SCALE_DELTA;
 
       const widthDiff = Math.abs(width * nextScale - width * scale) / 2;
       const heightDiff = Math.abs(height * nextScale - height * scale) / 2;
@@ -75,8 +76,8 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
 
       return {
         ...prevStatus,
-        x: nextX <= 0 ? nextX : 0,
-        y: nextY <= 0 ? nextY : 0,
+        x: nextX,
+        y: nextY,
         scale: nextScale,
       };
     });
@@ -97,13 +98,24 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
       const widthDiff = Math.abs(width * nextScale - width * scale) / 2;
       const heightDiff = Math.abs(height * nextScale - height * scale) / 2;
 
-      const nextX = x + widthDiff;
-      const nextY = y + heightDiff;
+      let nextX = x + widthDiff;
+      let nextY = y + heightDiff;
+
+      const minX = containerRef.current.offsetWidth - width * nextScale;
+      const minY = containerRef.current.offsetHeight - height * nextScale;
+
+      // 왼쪽 위에 여백이 생기는 상황
+      if (nextX >= 0) nextX = 0;
+      if (nextY >= 0) nextY = 0;
+
+      // 오른쪽 아래에 여백이 생기는 상황
+      if (nextX < minX) nextX = minX;
+      if (nextY < minY) nextY = minY;
 
       return {
         ...prevStatus,
-        x: nextX <= 0 ? nextX : 0,
-        y: nextY <= 0 ? nextY : 0,
+        x: nextX,
+        y: nextY,
         scale: nextScale < initialScale ? initialScale : nextScale,
       };
     });
