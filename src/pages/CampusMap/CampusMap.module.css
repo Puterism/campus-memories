@@ -42,3 +42,10 @@
 .zoomControl button:last-of-type {
   margin-bottom: 0;
 }
+
+@media (max-width: 768px) {
+  .logo {
+    width: 50%;
+    max-width: 363px;
+  }
+}

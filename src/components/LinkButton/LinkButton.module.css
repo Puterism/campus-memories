@@ -14,3 +14,9 @@
 .colored {
   background-color: var(--primary-color);
 }
+
+@media (max-width: 768px) {
+  .linkButton {
+    padding: 1.5rem;
+  }
+}
