@@ -9,8 +9,8 @@ interface Props {
   width: number;
   height: number;
   d: string;
-  xlinkHref: string;
-  activeXlinkHref: string;
+  href: string;
+  activeHref: string;
   pixelated?: boolean;
   onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
 }
@@ -20,7 +20,7 @@ export const Background = ({ pixelated = false }: { pixelated?: boolean }) => (
     id="background"
     width="2311"
     height="1300"
-    xlinkHref={imageBackground}
+    href={imageBackground}
     imageRendering={pixelated ? 'pixelated' : 'auto'}
     pointerEvents="none"
   />
@@ -32,7 +32,7 @@ export const Foreground = ({ pixelated = false }: { pixelated?: boolean }) => (
     width="2134"
     height="1300"
     transform="translate(49 28)"
-    xlinkHref={imageForeground}
+    href={imageForeground}
     imageRendering={pixelated ? 'pixelated' : 'auto'}
     pointerEvents="none"
   />
@@ -44,8 +44,8 @@ const BuildingImage = ({
   width,
   height,
   d,
-  xlinkHref,
-  activeXlinkHref,
+  href,
+  activeHref,
   pixelated,
   onClick,
 }: Props) => (
@@ -65,7 +65,7 @@ const BuildingImage = ({
       width={width}
       height={height}
       pointerEvents="none"
-      xlinkHref={xlinkHref}
+      href={href}
       imageRendering={pixelated ? 'pixelated' : 'auto'}
     />
     <image
@@ -74,7 +74,7 @@ const BuildingImage = ({
       width={width}
       height={height}
       pointerEvents="none"
-      xlinkHref={activeXlinkHref}
+      href={activeHref}
       imageRendering={pixelated ? 'pixelated' : 'auto'}
     />
   </g>
