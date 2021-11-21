@@ -50,6 +50,8 @@ const CampusMap = () => {
     containerRef,
   });
 
+  const imagePixelated = mapStatus.scale >= 1;
+
   const handleClickBuilding = (building: Building) => {
     if (isMoved) return;
 
@@ -85,10 +87,9 @@ const CampusMap = () => {
       </div>
       <img src={imageLogo} alt="Hongik Memories" className={styles.logo} />
       <svg
+        className={styles.campusMap}
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        width="100%"
-        height="100%"
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
@@ -102,16 +103,17 @@ const CampusMap = () => {
           transform={`matrix(${mapStatus.scale}, 0, 0, ${mapStatus.scale}, ${mapStatus.x}, ${mapStatus.y})`}
           ref={svgRef}
         >
-          <Background />
+          <Background pixelated={imagePixelated} />
           {Object.entries(SVG_DATA).map(([building, data]) => (
             <BuildingImage
               key={building}
               building={building}
+              pixelated={imagePixelated}
               onClick={() => handleClickBuilding(building as Building)}
               {...data}
             />
           ))}
-          <Foreground />
+          <Foreground pixelated={imagePixelated} />
         </g>
       </svg>
     </section>

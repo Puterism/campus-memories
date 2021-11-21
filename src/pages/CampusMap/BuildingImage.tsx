@@ -9,33 +9,43 @@ interface Props {
   height: number;
   d: string;
   xlinkHref: string;
+  pixelated?: boolean;
   onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
 }
 
-export const Background = () => (
+export const Background = ({ pixelated = false }: { pixelated?: boolean }) => (
   <image
     id="background"
     width="2311"
     height="1300"
     xlinkHref={imageBackground}
-    imageRendering="pixelated"
+    imageRendering={pixelated ? 'pixelated' : 'auto'}
     pointerEvents="none"
   />
 );
 
-export const Foreground = () => (
+export const Foreground = ({ pixelated = false }: { pixelated?: boolean }) => (
   <image
     id="foreground"
     width="2134"
     height="1300"
     transform="translate(49 28)"
     xlinkHref={imageForeground}
-    imageRendering="pixelated"
+    imageRendering={pixelated ? 'pixelated' : 'auto'}
     pointerEvents="none"
   />
 );
 
-const BuildingImage = ({ building, transform, width, height, d, xlinkHref, onClick }: Props) => (
+const BuildingImage = ({
+  building,
+  transform,
+  width,
+  height,
+  d,
+  xlinkHref,
+  pixelated,
+  onClick,
+}: Props) => (
   <g transform={transform}>
     <image
       id={building}
@@ -43,7 +53,7 @@ const BuildingImage = ({ building, transform, width, height, d, xlinkHref, onCli
       height={height}
       pointerEvents="none"
       xlinkHref={xlinkHref}
-      imageRendering="pixelated"
+      imageRendering={pixelated ? 'pixelated' : 'auto'}
     />
     <path
       fillRule="evenodd"
