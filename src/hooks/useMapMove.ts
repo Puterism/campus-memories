@@ -15,27 +15,24 @@ const useMapMove = ({ mapStatusState, svgRef, containerRef }: Params) => {
   const [movingCount, setMovingCount] = useState(0);
   const [dragOffset, setDragOffset] = useState<Coordinate | null>(null);
 
-  const onMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
-    const { clientX, clientY } = event;
-
+  const moveStart = ({ x, y }: Coordinate) => {
     setMoving(true);
     setMoved(false);
     setMovingCount(0);
-    setDragOffset({ x: clientX - mapStatus.x, y: clientY - mapStatus.y });
+    setDragOffset({ x: x - mapStatus.x, y: y - mapStatus.y });
   };
 
-  const onMouseMove = (event: React.MouseEvent<SVGSVGElement>) => {
+  const move = ({ x, y }: Coordinate) => {
     if (!isMoving || !dragOffset) return;
 
-    const { clientX, clientY } = event;
     const clientRect = svgRef.current?.getBoundingClientRect();
 
     if (!clientRect || !containerRef.current) return;
 
     const { offsetWidth, offsetHeight } = containerRef.current;
 
-    const targetTopLeft = clientX - dragOffset.x;
-    const targetBottomLeft = clientY - dragOffset.y;
+    const targetTopLeft = x - dragOffset.x;
+    const targetBottomLeft = y - dragOffset.y;
     const targetTopRight = targetTopLeft + clientRect.width;
     const targetBottomRight = targetBottomLeft + clientRect.height;
 
@@ -67,17 +64,63 @@ const useMapMove = ({ mapStatusState, svgRef, containerRef }: Params) => {
     if (movingCount > 5) setMoved(true);
   };
 
-  const onMouseUp = () => {
+  const moveEnd = () => {
     setMoving(false);
     setDragOffset(null);
+  };
+
+  const onMouseDown = (event: React.MouseEvent<SVGSVGElement>) => {
+    const { clientX, clientY } = event;
+
+    moveStart({ x: clientX, y: clientY });
+  };
+
+  const onMouseMove = (event: React.MouseEvent<SVGSVGElement>) => {
+    const { clientX, clientY } = event;
+
+    move({ x: clientX, y: clientY });
+  };
+
+  const onMouseUp = () => {
+    moveEnd();
   };
 
   const onMouseOut = () => {
-    setMoving(false);
-    setDragOffset(null);
+    moveEnd();
   };
 
-  return { isMoving, isMoved, onMouseDown, onMouseMove, onMouseUp, onMouseOut };
+  const onTouchStart = (event: React.TouchEvent<SVGSVGElement>) => {
+    const { clientX, clientY } = event.touches[0];
+
+    moveStart({ x: clientX, y: clientY });
+  };
+
+  const onTouchMove = (event: React.TouchEvent<SVGSVGElement>) => {
+    const { clientX, clientY } = event.touches[0];
+
+    move({ x: clientX, y: clientY });
+  };
+
+  const onTouchUp = () => {
+    moveEnd();
+  };
+
+  const onTouchEnd = () => {
+    moveEnd();
+  };
+
+  return {
+    isMoving,
+    isMoved,
+    onMouseDown,
+    onMouseMove,
+    onMouseUp,
+    onMouseOut,
+    onTouchStart,
+    onTouchMove,
+    onTouchUp,
+    onTouchEnd,
+  };
 };
 
 export default useMapMove;
