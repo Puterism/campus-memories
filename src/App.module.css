@@ -5,8 +5,8 @@
 }
 
 .aside {
-  min-width: 300px;
-  max-width: 320px;
+  min-width: 320px;
+  max-width: 460px;
   width: 30%;
   height: 100%;
   background-color: var(--primary-color);
@@ -17,23 +17,27 @@
 
 .expended {
   display: flex;
-  min-width: 600px;
-  max-width: 640px;
+  min-width: 640px;
+  max-width: 920px;
   width: 60%;
 }
 
 @media (max-width: 768px) {
-  .aside {
-    width: 100%;
-  }
-
   .expended {
-    min-width: 300px;
-    max-width: 320px;
-    width: 100%;
+    min-width: 320px;
+    max-width: 460px;
+    width: 30%;
   }
 
   .expended .container {
     display: none;
+  }
+}
+
+@media (max-width: 320px) {
+  .aside,
+  .expended {
+    min-width: 0;
+    width: 100%;
   }
 }
