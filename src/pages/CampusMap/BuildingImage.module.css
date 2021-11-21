@@ -2,11 +2,6 @@
   display: none;
 }
 
-.active {
+.hide {
   display: none;
-}
-
-.path:hover ~ .active,
-.path:active ~ .active {
-  display: block;
 }

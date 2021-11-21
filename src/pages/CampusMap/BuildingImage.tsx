@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import React from 'react';
 import imageBackground from '../../assets/images/background.png';
 import imageForeground from '../../assets/images/foreground.png';
@@ -11,6 +12,7 @@ interface Props {
   d: string;
   href: string;
   activeHref: string;
+  active?: boolean;
   pixelated?: boolean;
   onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
 }
@@ -46,6 +48,7 @@ const BuildingImage = ({
   d,
   href,
   activeHref,
+  active = false,
   pixelated,
   onClick,
 }: Props) => (
@@ -60,21 +63,21 @@ const BuildingImage = ({
       d={d}
     />
     <image
-      className={styles.normal}
-      id={building}
-      width={width}
-      height={height}
-      pointerEvents="none"
-      href={href}
-      imageRendering={pixelated ? 'pixelated' : 'auto'}
-    />
-    <image
       className={styles.active}
       id={`${building}-active`}
       width={width}
       height={height}
       pointerEvents="none"
       href={activeHref}
+      imageRendering={pixelated ? 'pixelated' : 'auto'}
+    />
+    <image
+      className={cx(styles.normal, { [styles.hide]: active })}
+      id={building}
+      width={width}
+      height={height}
+      pointerEvents="none"
+      href={href}
       imageRendering={pixelated ? 'pixelated' : 'auto'}
     />
   </g>

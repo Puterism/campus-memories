@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import imageLogo from '../../assets/images/logo.png';
 import menuIconUrl from '../../assets/menu.svg';
 import minusIconUrl from '../../assets/minus.svg';
@@ -19,6 +19,7 @@ import styles from './CampusMap.module.css';
 
 const CampusMap = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [mapStatus, setMapStatus] = useState({
     scale: 1,
@@ -108,6 +109,7 @@ const CampusMap = () => {
             <BuildingImage
               key={building}
               building={building}
+              active={pathname === BUILDING[building as Building].path}
               pixelated={imagePixelated}
               onClick={() => handleClickBuilding(building as Building)}
               {...data}
