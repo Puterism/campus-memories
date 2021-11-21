@@ -53,6 +53,7 @@
   margin: 0;
   letter-spacing: -0.1pt;
   line-height: 1.4;
+  white-space: pre-line;
   cursor: pointer;
 }
 
