@@ -18,6 +18,7 @@ export const Background = () => (
     width="2311"
     height="1300"
     xlinkHref={imageBackground}
+    imageRendering="pixelated"
     pointerEvents="none"
   />
 );
@@ -29,13 +30,21 @@ export const Foreground = () => (
     height="1300"
     transform="translate(49 28)"
     xlinkHref={imageForeground}
+    imageRendering="pixelated"
     pointerEvents="none"
   />
 );
 
 const BuildingImage = ({ building, transform, width, height, d, xlinkHref, onClick }: Props) => (
   <g transform={transform}>
-    <image id={building} width={width} height={height} pointerEvents="none" xlinkHref={xlinkHref} />
+    <image
+      id={building}
+      width={width}
+      height={height}
+      pointerEvents="none"
+      xlinkHref={xlinkHref}
+      imageRendering="pixelated"
+    />
     <path
       fillRule="evenodd"
       fill="transparent"
