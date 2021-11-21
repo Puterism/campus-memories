@@ -1,0 +1,12 @@
+.path:hover ~ .normal {
+  display: none;
+}
+
+.active {
+  display: none;
+}
+
+.path:hover ~ .active,
+.path:active ~ .active {
+  display: block;
+}
