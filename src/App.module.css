@@ -9,6 +9,8 @@
   max-width: 460px;
   width: 30%;
   height: 100vh;
+  max-height: -webkit-fill-available;
+  max-height: fill-available;
   background-color: var(--primary-color);
   border: 1px solid var(--primary-color);
   position: relative;
