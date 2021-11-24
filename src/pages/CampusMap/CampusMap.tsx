@@ -91,7 +91,7 @@ const CampusMap = () => {
     // Note: Safari에서 기본적으로 동작하는 줌 인/아웃 모션을 금지하기 위한 코드 적용
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    if (event.scale !== 1) event.preventDefault();
+    if (event.scale && event.scale !== 1 && event.touches.length > 1) event.preventDefault();
   };
 
   useLayoutEffect(() => {
