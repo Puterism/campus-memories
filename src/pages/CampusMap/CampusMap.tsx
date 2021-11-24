@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import imageLogo from '../../assets/images/logo.png';
 import menuIconUrl from '../../assets/menu.svg';
@@ -28,6 +28,7 @@ const CampusMap = () => {
     width: CAMPUS_MAP.MAP_WIDTH,
     height: CAMPUS_MAP.MAP_HEIGHT,
   });
+  const [height, setHeight] = useState(CAMPUS_MAP.MAP_HEIGHT);
 
   const containerRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -46,10 +47,11 @@ const CampusMap = () => {
     svgRef,
     containerRef,
   });
-  const { zoomIn, zoomOut, onWheel } = useMapScale({
-    mapStatusState: [mapStatus, setMapStatus],
-    containerRef,
-  });
+  const { onTouchStartZoom, onTouchMoveZoom, onTouchEndZoom, zoomIn, zoomOut, onWheel } =
+    useMapScale({
+      mapStatusState: [mapStatus, setMapStatus],
+      containerRef,
+    });
 
   const imagePixelated = mapStatus.scale >= 1;
 
@@ -70,6 +72,36 @@ const CampusMap = () => {
     }
   };
 
+  const handleTouchStart = (event: React.TouchEvent<SVGSVGElement>) => {
+    if (event.touches.length === 1) onTouchStart(event);
+    if (event.touches.length === 2) onTouchStartZoom(event);
+  };
+
+  const handleTouchMove = (event: React.TouchEvent<SVGSVGElement>) => {
+    if (event.touches.length === 1) onTouchMove(event);
+    if (event.touches.length === 2) onTouchMoveZoom(event);
+  };
+
+  const handleTouchEnd = () => {
+    onTouchEnd();
+    onTouchEndZoom();
+  };
+
+  const handleTouchMoveNative = (event: TouchEvent) => {
+    // Note: Safari에서 기본적으로 동작하는 줌 인/아웃 모션을 금지하기 위한 코드 적용
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if (event.scale !== 1) event.preventDefault();
+  };
+
+  useLayoutEffect(() => {
+    setHeight(window.innerHeight);
+
+    document.addEventListener('touchmove', handleTouchMoveNative, { passive: false });
+
+    return () => document.removeEventListener('touchmove', handleTouchMoveNative);
+  }, []);
+
   return (
     <section className={styles.campusMapContainer} ref={containerRef}>
       <LinkButton to={PATH.menu} className={styles.menuButton} colored>
@@ -89,14 +121,16 @@ const CampusMap = () => {
       <img src={imageLogo} alt="Hongik Memories" className={styles.logo} />
       <svg
         className={styles.campusMap}
+        width="100%"
+        height={height}
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         onWheel={onWheel}
         cursor={isMoving ? 'grabbing' : 'grab'}
       >

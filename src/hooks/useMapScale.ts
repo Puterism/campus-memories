@@ -1,6 +1,6 @@
-import { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import CAMPUS_MAP from '../constants/campusMap';
-import { MapStatus } from '../types/common';
+import { Coordinate, MapStatus } from '../types/common';
 import useWindowSize from './useWindowSize';
 
 interface Params {
@@ -11,17 +11,21 @@ interface Params {
 const useMapScale = ({ mapStatusState, containerRef }: Params) => {
   const [, setMapStatus] = mapStatusState;
   const [initialScale, setInitialScale] = useState<number | null>(null);
+
+  const [isScaling, setScaling] = useState(false);
+  const [scaleOffset, setScaleOffset] = useState<Coordinate>({ x: 0, y: 0 });
+  const [distanceDiff, setDistanceDiff] = useState(-1);
+
   const windowSize = useWindowSize();
 
   const maxScale = (initialScale ?? 1) * 2;
 
-  const onWheel = (event: React.WheelEvent<SVGSVGElement>) => {
+  const zoomInOut = ({ x: clientX, y: clientY }: Coordinate, deltaY: number) => {
     if (initialScale === null) return;
 
     setMapStatus((prevStatus) => {
       if (!containerRef.current) return prevStatus;
 
-      const { clientX, clientY, deltaY } = event;
       const { scale, x, y, width, height } = prevStatus;
 
       let nextScale = scale - deltaY * CAMPUS_MAP.SCALE_DELTA;
@@ -56,6 +60,44 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
         scale: nextScale,
       };
     });
+  };
+
+  const onWheel = (event: React.WheelEvent<SVGSVGElement>) => {
+    const { clientX, clientY, deltaY } = event;
+
+    zoomInOut({ x: clientX, y: clientY }, deltaY);
+  };
+
+  const onTouchStartZoom = (event: React.TouchEvent<SVGSVGElement>) => {
+    if (event.touches.length !== 2) return;
+
+    event.preventDefault();
+
+    const distance = Math.hypot(
+      event.touches[0].clientX - event.touches[1].clientX,
+      event.touches[0].clientY - event.touches[1].clientY
+    );
+
+    setScaling(true);
+    setScaleOffset({ x: event.touches[0].clientX, y: event.touches[0].clientY });
+    setDistanceDiff(distance);
+  };
+
+  const onTouchMoveZoom = (event: React.TouchEvent<SVGSVGElement>) => {
+    if (event.touches.length !== 2 || !isScaling) return;
+
+    const distance =
+      Math.hypot(
+        event.touches[0].clientX - event.touches[1].clientX,
+        event.touches[0].clientY - event.touches[1].clientY
+      ) * 2;
+
+    zoomInOut(scaleOffset, distanceDiff > 0 ? distanceDiff - distance : distance);
+    setDistanceDiff(distance);
+  };
+
+  const onTouchEndZoom = () => {
+    setScaling(false);
   };
 
   const zoomIn = () => {
@@ -146,7 +188,14 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
     setInitialScale(nextScale);
   }, [containerRef, windowSize]);
 
-  return { onWheel, zoomIn, zoomOut };
+  return {
+    onWheel,
+    onTouchStartZoom,
+    onTouchMoveZoom,
+    onTouchEndZoom,
+    zoomIn,
+    zoomOut,
+  };
 };
 
 export default useMapScale;
