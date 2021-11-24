@@ -73,10 +73,11 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
 
     event.preventDefault();
 
-    const distance = Math.hypot(
-      event.touches[0].clientX - event.touches[1].clientX,
-      event.touches[0].clientY - event.touches[1].clientY
-    );
+    const distance =
+      Math.hypot(
+        event.touches[0].clientX - event.touches[1].clientX,
+        event.touches[0].clientY - event.touches[1].clientY
+      ) * 2;
 
     setScaling(true);
     setScaleOffset({ x: event.touches[0].clientX, y: event.touches[0].clientY });
@@ -98,6 +99,7 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
 
   const onTouchEndZoom = () => {
     setScaling(false);
+    setDistanceDiff(-1);
   };
 
   const zoomIn = () => {
