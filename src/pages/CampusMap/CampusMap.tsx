@@ -103,7 +103,6 @@ const CampusMap = () => {
 
   return (
     <section className={styles.campusMapContainer} ref={containerRef}>
-      <h1 style={{ position: 'fixed', left: '100px', top: '100px' }}>{height}</h1>
       <LinkButton to={PATH.menu} className={styles.menuButton} colored>
         <img src={menuIconUrl} alt="메뉴" />
       </LinkButton>
