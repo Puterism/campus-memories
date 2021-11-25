@@ -52,7 +52,7 @@
   padding: 1rem 1.25rem;
   margin: 0;
   letter-spacing: -0.1pt;
-  line-height: 1.4;
+  line-height: 1.6;
   white-space: pre-line;
   cursor: pointer;
 }
@@ -101,7 +101,7 @@
 .detailItem {
   margin: 1.875rem;
   letter-spacing: -0.1pt;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 .add {
