@@ -10,7 +10,7 @@ import styles from './Menu.module.css';
 
 const Menu = () => {
   return (
-    <aside className={appStyles.aside}>
+    <aside className={cx(appStyles.aside, appStyles.shrink)}>
       <div className={styles.menuContainer}>
         <div className={styles.menuHeader}>
           <Link to={PATH.about} className={cx(styles.menuItemLink, styles.about)}>

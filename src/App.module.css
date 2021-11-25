@@ -6,7 +6,7 @@
 
 .aside {
   min-width: 320px;
-  max-width: 460px;
+  max-width: 420px;
   width: 30%;
   height: 100vh;
   max-height: -webkit-fill-available;
@@ -17,22 +17,33 @@
   z-index: 2;
 }
 
+.shrink {
+  min-width: 0;
+  max-width: none;
+  width: 210px;
+}
+
 .expended {
   display: flex;
   min-width: 640px;
-  max-width: 920px;
+  max-width: 840px;
   width: 60%;
 }
 
 @media (max-width: 768px) {
+  .aside,
   .expended {
-    min-width: 320px;
-    max-width: 460px;
-    width: 30%;
+    min-width: 0;
+    max-width: none;
+    width: 100%;
   }
 
   .expended .container {
     display: none;
+  }
+
+  .shrink {
+    width: 100%;
   }
 }
 
