@@ -12,6 +12,7 @@ interface Props {
   d: string;
   href: string;
   activeHref: string;
+  dTransform?: string;
   active?: boolean;
   pixelated?: boolean;
   onClick?: (event: React.MouseEvent<SVGPathElement>) => void;
@@ -46,6 +47,7 @@ const BuildingImage = ({
   width,
   height,
   d,
+  dTransform,
   href,
   activeHref,
   active = false,
@@ -61,6 +63,7 @@ const BuildingImage = ({
       cursor="pointer"
       onClick={onClick}
       d={d}
+      transform={dTransform ?? ''}
     />
     <image
       className={styles.active}
