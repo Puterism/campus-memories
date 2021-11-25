@@ -13,6 +13,7 @@ import PATH from '../../constants/path';
 import SVG_DATA from '../../constants/svgData';
 import useMapMove from '../../hooks/useMapMove';
 import useMapScale from '../../hooks/useMapScale';
+import useWindowSize from '../../hooks/useWindowSize';
 import { Building } from '../../types/common';
 import BuildingImage, { Background, Foreground } from './BuildingImage';
 import styles from './CampusMap.module.css';
@@ -28,7 +29,7 @@ const CampusMap = () => {
     width: CAMPUS_MAP.MAP_WIDTH,
     height: CAMPUS_MAP.MAP_HEIGHT,
   });
-  const [height, setHeight] = useState(CAMPUS_MAP.MAP_HEIGHT);
+  const { height } = useWindowSize();
 
   const containerRef = useRef<HTMLElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -95,8 +96,6 @@ const CampusMap = () => {
   };
 
   useLayoutEffect(() => {
-    setHeight(window.innerHeight);
-
     document.addEventListener('touchmove', handleTouchMoveNative, { passive: false });
 
     return () => document.removeEventListener('touchmove', handleTouchMoveNative);
@@ -104,6 +103,7 @@ const CampusMap = () => {
 
   return (
     <section className={styles.campusMapContainer} ref={containerRef}>
+      <h1 style={{ position: 'fixed', left: '100px', top: '100px' }}>{height}</h1>
       <LinkButton to={PATH.menu} className={styles.menuButton} colored>
         <img src={menuIconUrl} alt="메뉴" />
       </LinkButton>

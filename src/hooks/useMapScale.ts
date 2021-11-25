@@ -187,8 +187,14 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
       containerRef.current.offsetHeight / CAMPUS_MAP.MAP_HEIGHT
     );
 
+    setMapStatus((prevStatus) => ({
+      ...prevStatus,
+      y: 0,
+      scale: prevStatus.scale > nextScale ? prevStatus.scale : nextScale,
+    }));
+
     setInitialScale(nextScale);
-  }, [containerRef, windowSize]);
+  }, [containerRef, setMapStatus, windowSize]);
 
   return {
     onWheel,
