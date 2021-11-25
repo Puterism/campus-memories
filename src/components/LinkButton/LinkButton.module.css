@@ -1,12 +1,11 @@
 .linkButton {
-  width: 0;
-  height: 0;
+  width: 45px;
+  height: 45px;
   background: none;
   color: var(--primary-color);
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 1.625rem;
   border: none;
   cursor: pointer;
 }
