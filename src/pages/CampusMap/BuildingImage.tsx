@@ -59,7 +59,6 @@ const BuildingImage = ({
       className={styles.path}
       fillRule="evenodd"
       fill="transparent"
-      stroke="red"
       cursor="pointer"
       onClick={onClick}
       d={d}
