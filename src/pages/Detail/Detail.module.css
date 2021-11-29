@@ -113,3 +113,10 @@
 .add button {
   background-color: #fffd5c;
 }
+
+.detailContentImage {
+  display: block;
+  width: 100%;
+  margin-bottom: 20px;
+  image-rendering: pixelated;
+}
