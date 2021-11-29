@@ -6,15 +6,34 @@ import styles from './LinkButton.module.css';
 type Attributes = Partial<LinkProps> & ButtonHTMLAttributes<HTMLButtonElement>;
 
 interface Props extends Attributes {
-  colored?: boolean;
+  primary?: boolean;
+  secondary?: boolean;
+  transparent?: boolean;
+  big?: boolean;
 }
 
-const LinkButton = ({ to, children, className, colored = false, ...props }: Props) => {
+const LinkButton = ({
+  to,
+  children,
+  className,
+  primary = false,
+  secondary = false,
+  transparent = false,
+  big = false,
+  ...props
+}: Props) => {
   if (to) {
     return (
       <Link
         to={to}
-        className={cx(styles.linkButton, className, { [styles.colored]: colored })}
+        className={cx(
+          styles.linkButton,
+          className,
+          { [styles.primary]: primary },
+          { [styles.secondary]: secondary },
+          { [styles.transparent]: transparent },
+          { [styles.big]: big }
+        )}
         {...props}
       >
         {children}
@@ -25,7 +44,14 @@ const LinkButton = ({ to, children, className, colored = false, ...props }: Prop
   return (
     <button
       type="button"
-      className={cx(styles.linkButton, className, { [styles.colored]: colored })}
+      className={cx(
+        styles.linkButton,
+        className,
+        { [styles.primary]: primary },
+        { [styles.secondary]: secondary },
+        { [styles.transparent]: transparent },
+        { [styles.big]: big }
+      )}
       {...props}
     >
       {children}

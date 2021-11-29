@@ -1,10 +1,6 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import imageLogo from '../../assets/images/logo.png';
-import menuIconUrl from '../../assets/menu.svg';
-import minusIconUrl from '../../assets/minus.svg';
-import plusIconUrl from '../../assets/plus.svg';
-import shareIconUrl from '../../assets/share.svg';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import { BUILDING } from '../../constants/building';
 import CAMPUS_MAP from '../../constants/campusMap';
@@ -103,18 +99,108 @@ const CampusMap = () => {
 
   return (
     <section className={styles.campusMapContainer} ref={containerRef}>
-      <LinkButton to={PATH.menu} className={styles.menuButton} colored>
-        <img src={menuIconUrl} alt="메뉴" />
+      <LinkButton to={PATH.menu} className={styles.menuButton} primary aria-label="메뉴">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="15.401" viewBox="0 0 21 15.401">
+          <g transform="translate(-285.437 -577.515)">
+            <line
+              x2="21"
+              transform="translate(285.437 578.015)"
+              fill="none"
+              stroke="#fff"
+              strokeWidth="1"
+            />
+            <line
+              x2="21"
+              transform="translate(285.437 585.215)"
+              fill="none"
+              stroke="#fff"
+              strokeWidth="1"
+            />
+            <path d="M285.437,592.416h21" fill="#374DBA" stroke="#fff" strokeWidth="1" />
+          </g>
+        </svg>
       </LinkButton>
-      <LinkButton className={styles.shareButton} onClick={handleClickShare} colored>
-        <img src={shareIconUrl} alt="링크 공유" />
+      <LinkButton
+        className={styles.shareButton}
+        onClick={handleClickShare}
+        primary
+        aria-label="링크 공유"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="23.836" viewBox="0 0 21 23.836">
+          <g transform="translate(-12 -8.164)">
+            <g transform="translate(-373.437 -562.716)">
+              <rect width="21" height="16" transform="translate(385.437 578.716)" fill="none" />
+              <path
+                d="M398.926,579.216h7.011v15h-20v-15h6.979"
+                fill="none"
+                stroke="#fff"
+                strokeWidth="1"
+              />
+              <path d="M398.926,579.216" fill="none" stroke="#fff" strokeWidth="1" />
+            </g>
+            <g transform="translate(-373.437 -562.716)">
+              <line
+                y1="14"
+                transform="translate(395.937 571.716)"
+                fill="none"
+                stroke="#fff"
+                strokeWidth="1"
+              />
+
+              <path
+                d="M391.889,575.635l4.048-4.048,4.048,4.048"
+                fill="none"
+                stroke="#fff"
+                strokeWidth="1"
+              />
+            </g>
+          </g>
+        </svg>
       </LinkButton>
       <div className={styles.zoomControl}>
-        <LinkButton onClick={zoomIn} colored>
-          <img src={plusIconUrl} alt="확대" />
+        <LinkButton onClick={zoomIn} primary aria-label="확대">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="27.497"
+            height="27.497"
+            viewBox="0 0 27.497 27.497"
+          >
+            <g transform="translate(-8.752 -8.371)">
+              <line
+                x2="18.74"
+                y2="18.732"
+                transform="translate(22.497 8.871) rotate(45)"
+                fill="none"
+                stroke="#fff"
+                strokeWidth="1"
+              />
+              <line
+                x1="18.74"
+                y2="18.732"
+                transform="translate(22.497 8.871) rotate(45)"
+                fill="none"
+                stroke="#fff"
+                strokeWidth="1"
+              />
+            </g>
+          </svg>
         </LinkButton>
-        <LinkButton onClick={zoomOut} colored>
-          <img src={minusIconUrl} alt="축소" />
+        <LinkButton onClick={zoomOut} primary aria-label="축소">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="27.497"
+            height="27.497"
+            viewBox="0 0 27.497 27.497"
+          >
+            <line
+              x1="18.74"
+              y2="18.732"
+              transform="translate(13.746 0.5) rotate(45)"
+              fill="none"
+              stroke="#fff"
+              strokeWidth="1"
+            />
+          </svg>
         </LinkButton>
       </div>
       <img src={imageLogo} alt="Hongik Memories" className={styles.logo} />

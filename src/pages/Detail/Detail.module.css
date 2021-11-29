@@ -47,7 +47,7 @@
 
 .comment {
   background-color: #ffffff;
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: #b5c1ff;
   color: var(--primary-color);
   padding: 1rem 1.25rem;
   margin: 0;
@@ -75,23 +75,47 @@
 }
 
 .commentControlInput::placeholder {
-  color: #92b3ff;
+  color: #b5c1ff;
   line-height: 2rem;
   font-size: 1.125rem;
 }
 
 .commentControlButton {
-  height: 2rem;
+  height: 45px;
   padding: 0 20px;
   flex: 1;
-  background-color: #92b3ff;
+  background-color: #b5c1ff;
+  color: var(--primary-color);
   border: none;
-  border-right: 1px solid var(--primary-color);
+  border-top: 1px solid var(--primary-color);
+  border-left: 1px solid var(--primary-color);
+  font-size: 18px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
-.commentControlButton:last-of-type {
-  border-right: none;
+.commentControlButton:hover {
+  background-color: var(--primary-color);
+  color: #b5c1ff;
+}
+
+.commentControlButton:first-of-type {
+  border-left: none;
+}
+
+.commentControlButton:first-of-type:hover {
+  border-top: 1px solid #b5c1ff;
+  box-shadow: 1px -1px 0px 0px #b5c1ff inset;
+}
+
+.commentControlButton:first-of-type:hover ~ .commentControlButton:last-of-type {
+  border-left: 1px solid #b5c1ff;
+}
+
+.commentControlButton:last-of-type:hover {
+  border-top: 1px solid #b5c1ff;
+  border-left: 1px solid #b5c1ff;
+  box-shadow: -1px -1px 0px 0px #b5c1ff inset;
 }
 
 .commentControlButton:disabled {
@@ -111,7 +135,7 @@
 }
 
 .add button {
-  background-color: #fffd5c;
+  background-color: var(--secondary-color);
 }
 
 .detailContentImage {
@@ -120,3 +144,38 @@
   margin-bottom: 20px;
   image-rendering: pixelated;
 }
+
+/* .commentControlButton {
+  height: 45px;
+  padding: 0 20px;
+  flex: 1;
+  background-color: #b5c1ff;
+  color: var(--primary-color);
+  border: none;
+  border-top: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+  font-size: 18px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.commentControlButton:hover {
+  background-color: var(--primary-color);
+  color: #b5c1ff;
+}
+
+.commentControlButton:first-of-type:hover {
+  border-top: 1px solid #b5c1ff;
+  border-right: 1px solid #b5c1ff;
+  box-shadow: 1px -1px 0px -0.5px #b5c1ff inset;
+}
+
+.commentControlButton:last-of-type {
+  border-right: none;
+}
+
+.commentControlButton:last-of-type:hover {
+  border-top: 1px solid #b5c1ff;
+  border-left: none;
+  box-shadow: -1px -1px 0px -0.5px #b5c1ff inset;
+} */

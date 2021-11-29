@@ -22,13 +22,17 @@
 }
 
 .menuItemLink {
-  display: block;
+  display: flex;
+  align-items: center;
   height: 3rem;
-  line-height: 3rem;
   padding: 0 1.25rem;
   font-size: 1.375rem;
   text-decoration: none;
   color: var(--primary-color);
+}
+
+.menuItemLink:hover {
+  background-color: var(--secondary-color);
 }
 
 .menu .menuItemLink {
@@ -38,6 +42,13 @@
 .about {
   flex: 1;
   color: #ffffff;
+  background-color: var(--primary-color);
+  height: 100%;
+}
+
+.about:hover {
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 }
 
 .closeLink {

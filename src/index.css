@@ -29,7 +29,8 @@ code {
 }
 
 :root {
-  --primary-color: #002989;
+  --primary-color: #374dba;
+  --secondary-color: #5cffb4;
 }
 
 * {

@@ -12,6 +12,7 @@
   height: 56px;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .form {
@@ -26,12 +27,13 @@
   display: block;
   background-color: #ffffff;
   border: 1px solid var(--primary-color);
+  border-bottom: 0;
   font-size: 1.125rem;
   padding: 1.25rem;
 }
 
 .input::placeholder {
-  color: #92b3ff;
+  color: #b5c1ff;
   font-size: 1.125rem;
 }
 
@@ -43,16 +45,24 @@
 }
 
 .submitButton {
-  height: 45px;
-  line-height: 45px;
-  font-size: 1.5rem;
-  background-color: var(--primary-color);
-  border: none;
-  color: #fffd5c;
+  height: 55px;
+  line-height: 55px;
+  font-size: 25px;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
   cursor: pointer;
+  box-sizing: border-box;
+}
+
+.submitButton:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
 .submitButton:disabled {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
   cursor: default;
 }
 

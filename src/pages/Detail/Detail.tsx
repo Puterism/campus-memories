@@ -1,7 +1,6 @@
 import cx from 'classnames';
 import React, { useState } from 'react';
 import appStyles from '../../App.module.css';
-import addIconUrl from '../../assets/add.svg';
 import closeWhiteUrl from '../../assets/close_white.svg';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import { BUILDING } from '../../constants/building';
@@ -146,8 +145,30 @@ const Detail = ({ building }: Props) => {
           </ul>
         </section>
         <div className={styles.add}>
-          <LinkButton onClick={openCommentEditor}>
-            <img src={addIconUrl} alt="추가" />
+          <LinkButton secondary big onClick={openCommentEditor} aria-label="추가">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="31.4"
+              height="31.4"
+              viewBox="0 0 31.4 31.4"
+            >
+              <line
+                x2="21.5"
+                y2="21.492"
+                transform="translate(0.5 15.703) rotate(-45)"
+                fill="none"
+                stroke="#374DBA"
+                strokeWidth="1"
+              />
+              <line
+                x1="21.5"
+                y2="21.492"
+                transform="translate(0.5 15.703) rotate(-45)"
+                fill="none"
+                stroke="#374DBA"
+                strokeWidth="1"
+              />
+            </svg>
           </LinkButton>
         </div>
       </div>

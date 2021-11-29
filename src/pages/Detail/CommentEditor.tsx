@@ -69,7 +69,7 @@ const CommentEditor = ({ building, id, initialText, onClose }: Props) => {
   return (
     <section className={styles.commentEditorContainer}>
       <div className={styles.header}>
-        <LinkButton onClick={onClose}>
+        <LinkButton transparent onClick={onClose}>
           <img src={closeIconUrl} alt="닫기" />
         </LinkButton>
       </div>
