@@ -134,10 +134,6 @@
   right: 1.875rem;
 }
 
-.add button {
-  background-color: var(--secondary-color);
-}
-
 .detailContentImage {
   display: block;
   width: 100%;

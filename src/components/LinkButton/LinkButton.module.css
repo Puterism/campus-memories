@@ -26,7 +26,6 @@
 
 .secondary {
   background-color: var(--secondary-color);
-  border: none;
 }
 
 .secondary:hover {
