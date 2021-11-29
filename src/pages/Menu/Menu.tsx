@@ -5,10 +5,13 @@ import closeWhiteUrl from '../../assets/close_white.svg';
 import LinkButton from '../../components/LinkButton/LinkButton';
 import { BUILDING } from '../../constants/building';
 import PATH from '../../constants/path';
+import useActiveBuilding from '../../hooks/useActiveBuilding';
 import { Building } from '../../types/common';
 import styles from './Menu.module.css';
 
 const Menu = () => {
+  const { setActiveBuilding } = useActiveBuilding();
+
   return (
     <aside className={cx(appStyles.aside, appStyles.shrink)}>
       <div className={styles.menuContainer}>
@@ -28,7 +31,13 @@ const Menu = () => {
 
             return (
               <li key={building}>
-                <Link to={path} className={styles.menuItemLink}>
+                <Link
+                  to={path}
+                  className={styles.menuItemLink}
+                  onMouseEnter={() => setActiveBuilding(building as Building)}
+                  onMouseLeave={() => setActiveBuilding(null)}
+                  onClick={() => setActiveBuilding(null)}
+                >
                   {name}
                 </Link>
               </li>

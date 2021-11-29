@@ -7,6 +7,7 @@ import CAMPUS_MAP from '../../constants/campusMap';
 import { MESSAGE } from '../../constants/message';
 import PATH from '../../constants/path';
 import SVG_DATA from '../../constants/svgData';
+import useActiveBuilding from '../../hooks/useActiveBuilding';
 import useMapMove from '../../hooks/useMapMove';
 import useMapScale from '../../hooks/useMapScale';
 import useWindowSize from '../../hooks/useWindowSize';
@@ -17,6 +18,8 @@ import styles from './CampusMap.module.css';
 const CampusMap = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  const { activeBuilding } = useActiveBuilding();
 
   const [mapStatus, setMapStatus] = useState({
     scale: 1,
@@ -228,7 +231,9 @@ const CampusMap = () => {
             <BuildingImage
               key={building}
               building={building}
-              active={pathname === BUILDING[building as Building].path}
+              active={
+                pathname === BUILDING[building as Building].path || activeBuilding === building
+              }
               pixelated={imagePixelated}
               onClick={() => handleClickBuilding(building as Building)}
               {...data}
