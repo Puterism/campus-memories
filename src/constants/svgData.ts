@@ -21,30 +21,30 @@ import imageYM from '../assets/images/YM.png';
 import imageZ1 from '../assets/images/Z1.png';
 import imageZ2Z3 from '../assets/images/Z2Z3.png';
 import imageZ4 from '../assets/images/Z4.png';
-import activeImageABCD from '../assets/images/active/ABCDa.png';
-import activeImageDD from '../assets/images/active/DDa.png';
-import activeImageE from '../assets/images/active/Ea.png';
-import activeImageF from '../assets/images/active/Fa.png';
-import activeImageG from '../assets/images/active/Ga.png';
-import activeImageH from '../assets/images/active/Ha.png';
-import activeImageI from '../assets/images/active/Ia.png';
-import activeImageJ from '../assets/images/active/Ja.png';
-import activeImageK from '../assets/images/active/Ka.png';
-import activeImageL from '../assets/images/active/La.png';
-import activeImageMH from '../assets/images/active/MHa.png';
-import activeImageM from '../assets/images/active/Ma.png';
-import activeImagePG from '../assets/images/active/PGa.png';
-import activeImageP from '../assets/images/active/Pa.png';
-import activeImageQ from '../assets/images/active/Qa.png';
-import activeImageR from '../assets/images/active/Ra.png';
-import activeImageS from '../assets/images/active/Sa.png';
-import activeImageT from '../assets/images/active/Ta.png';
-import activeImageU from '../assets/images/active/Ua.png';
-import activeImageYM from '../assets/images/active/YMa.png';
-import activeImageZ1 from '../assets/images/active/Z1a.png';
-import activeImageZ2Z3 from '../assets/images/active/Z2Z3a.png';
-import activeImageZ4 from '../assets/images/active/Z4a.png';
-import activeImageDORM from '../assets/images/active/dorma.png';
+import activeImageABCD from '../assets/images/active/ABCDa.gif';
+import activeImageDD from '../assets/images/active/DDa.gif';
+import activeImageE from '../assets/images/active/Ea.gif';
+import activeImageF from '../assets/images/active/Fa.gif';
+import activeImageG from '../assets/images/active/Ga.gif';
+import activeImageH from '../assets/images/active/Ha.gif';
+import activeImageI from '../assets/images/active/Ia.gif';
+import activeImageJ from '../assets/images/active/Ja.gif';
+import activeImageK from '../assets/images/active/Ka.gif';
+import activeImageL from '../assets/images/active/La.gif';
+import activeImageMH from '../assets/images/active/MHa.gif';
+import activeImageM from '../assets/images/active/Ma.gif';
+import activeImagePG from '../assets/images/active/PGa.gif';
+import activeImageP from '../assets/images/active/Pa.gif';
+import activeImageQ from '../assets/images/active/Qa.gif';
+import activeImageR from '../assets/images/active/Ra.gif';
+import activeImageS from '../assets/images/active/Sa.gif';
+import activeImageT from '../assets/images/active/Ta.gif';
+import activeImageU from '../assets/images/active/Ua.gif';
+import activeImageYM from '../assets/images/active/YMa.gif';
+import activeImageZ1 from '../assets/images/active/Z1a.gif';
+import activeImageZ2Z3 from '../assets/images/active/Z2Z3a.gif';
+import activeImageZ4 from '../assets/images/active/Z4a.gif';
+import activeImageDORM from '../assets/images/active/dorma.gif';
 import imageDORM from '../assets/images/dorm.png';
 
 import { Building } from '../types/common';
@@ -100,7 +100,6 @@ const SVG_DATA: Record<Building, BuildingSVGData> = {
     href: imageP,
     activeHref: activeImageP,
   },
-
   [Building.J]: {
     transform: 'translate(47 125)',
     width: 126,
@@ -207,32 +206,34 @@ const SVG_DATA: Record<Building, BuildingSVGData> = {
   },
   [Building.ABCD]: {
     transform: 'translate(1509 83)',
-    width: 802,
+    width: 759,
     height: 489,
     d: 'M661.999,0.0 C693.996,0.0 726.3,0.0 758.0,0.0 C761.531,10.755 759.0,29.267 759.0,42.0 C759.0,72.330 759.0,102.669 759.0,132.999 C759.0,233.989 759.0,335.10 759.0,435.999 C767.580,435.863 796.910,433.757 801.999,436.999 C787.668,436.999 773.331,436.999 759.0,436.999 C759.0,454.331 759.0,471.668 759.0,489.0 C726.669,489.0 694.330,489.0 661.999,489.0 C661.999,468.2 661.999,446.997 661.999,426.0 C643.1,426.0 623.998,426.0 605.0,426.0 C605.0,429.666 605.0,433.333 605.0,436.999 C545.5,436.999 484.994,436.999 424.999,436.999 C424.999,439.999 424.999,443.0 424.999,446.0 C395.336,446.0 365.663,446.0 336.0,446.0 C336.0,449.999 336.0,454.0 336.0,458.0 C331.333,458.0 326.666,458.0 322.0,458.0 C322.0,451.0 322.0,443.999 322.0,436.999 C280.670,436.999 239.329,436.999 197.999,436.999 C197.999,450.998 197.999,465.1 197.999,479.0 C163.3,479.0 127.996,479.0 93.0,479.0 C93.0,465.1 93.0,450.998 93.0,436.999 C62.3,436.999 30.996,436.999 0.0,436.999 C0.0,404.669 0.0,372.330 0.0,340.0 C2.999,340.0 6.0,340.0 9.0,340.0 C9.0,338.666 9.0,337.333 9.0,335.999 C37.330,335.999 65.669,335.999 94.0,335.999 C94.0,337.333 94.0,338.666 94.0,340.0 C95.333,340.0 96.666,340.0 97.999,340.0 C97.999,284.672 97.999,229.327 97.999,174.0 C100.333,174.0 102.666,174.0 104.999,174.0 C104.999,176.666 104.999,179.333 104.999,181.999 C126.997,181.999 149.2,181.999 170.999,181.999 C170.999,179.333 170.999,176.666 170.999,174.0 C173.333,174.0 175.666,174.0 177.999,174.0 C177.999,229.327 177.999,284.672 177.999,340.0 C201.330,340.0 224.669,340.0 248.0,340.0 C248.0,271.6 248.0,201.993 248.0,132.999 C385.986,132.999 524.13,132.999 661.999,132.999 C661.999,88.671 661.999,44.328 661.999,0.0 Z',
     href: imageABCD,
     activeHref: activeImageABCD,
   },
   [Building.YM]: {
-    transform: 'translate(1128 589)',
-    width: 102,
-    height: 82,
+    transform: 'translate(1111 607)',
+    width: 119,
+    height: 64,
     d: 'M1.0,0.0 L0.0,66.999 L26.0,89.999 L107.999,91.0 L107.999,0.0 L1.0,0.0 Z',
+    dTransform: 'translate(13 -17)',
     href: imageYM,
     activeHref: activeImageYM,
   },
   [Building.DD]: {
-    transform: 'translate(1244 609)',
+    transform: 'translate(1244 626)',
     width: 287,
-    height: 89,
+    height: 58,
     d: 'M0.0,37.0 L0.0,70.0 L295.999,70.0 L295.999,37.0 L0.0,37.0 Z',
+    dTransform: 'translate(-5 -16)',
     href: imageDD,
     activeHref: activeImageDD,
   },
   [Building.S]: {
-    transform: 'translate(1463 678)',
+    transform: 'translate(1462 678)',
     width: 234,
-    height: 220,
+    height: 215,
     d: 'M141.0,0.0 C148.670,0.941 159.330,0.934 166.999,0.0 C166.999,26.997 166.999,54.2 166.999,80.999 C189.331,80.999 211.668,80.999 234.0,80.999 C234.0,125.662 234.0,170.337 234.0,215.0 C193.670,215.0 153.329,215.0 113.0,215.0 C112.926,217.532 112.879,218.716 112.0,220.0 C112.0,218.333 112.0,216.666 112.0,215.0 C83.2,215.0 53.997,215.0 25.0,215.0 C25.0,213.333 25.0,211.666 25.0,209.999 C16.667,209.999 8.332,209.999 0.0,209.999 C0.0,173.337 0.0,136.663 0.0,100.0 C10.447,100.35 14.739,98.73 25.0,97.999 C25.0,92.333 25.0,86.666 25.0,80.999 C63.662,80.999 102.337,80.999 141.0,80.999 C141.0,54.2 141.0,26.997 141.0,0.0 Z',
     href: imageS,
     activeHref: activeImageS,

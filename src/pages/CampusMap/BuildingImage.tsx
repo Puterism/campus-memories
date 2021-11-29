@@ -32,9 +32,9 @@ export const Background = ({ pixelated = false }: { pixelated?: boolean }) => (
 export const Foreground = ({ pixelated = false }: { pixelated?: boolean }) => (
   <image
     id="foreground"
-    width="2134"
-    height="1300"
-    transform="translate(49 28)"
+    width="2176"
+    height="1199"
+    transform="translate(46 78)"
     href={imageForeground}
     imageRendering={pixelated ? 'pixelated' : 'auto'}
     pointerEvents="none"
@@ -54,11 +54,12 @@ const BuildingImage = ({
   pixelated,
   onClick,
 }: Props) => (
-  <g transform={transform}>
+  <g transform={transform} className={cx({ [styles.activeGroup]: active })}>
     <path
       className={styles.path}
       fillRule="evenodd"
       fill="transparent"
+      stroke="red"
       cursor="pointer"
       onClick={onClick}
       d={d}
@@ -74,7 +75,7 @@ const BuildingImage = ({
       imageRendering={pixelated ? 'pixelated' : 'auto'}
     />
     <image
-      className={cx(styles.normal, { [styles.hide]: active })}
+      className={cx(styles.normal)}
       id={building}
       width={width}
       height={height}

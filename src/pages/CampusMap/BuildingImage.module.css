@@ -1,7 +1,10 @@
+.active,
+.activeGroup .normal,
 .path:hover ~ .normal {
   display: none;
 }
 
-.hide {
-  display: none;
+.activeGroup .active,
+.path:hover ~ .active {
+  display: block;
 }
