@@ -48,9 +48,3 @@
   width: 55px;
   height: 55px;
 }
-
-@media (max-width: 768px) {
-  .linkButton {
-    padding: 1.5rem;
-  }
-}
