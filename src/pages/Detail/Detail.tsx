@@ -87,7 +87,7 @@ const Detail = ({ building }: Props) => {
         <header className={styles.header}>
           <div className={styles.dummy} />
           <h2 className={styles.title}>{BUILDING[building].name}</h2>
-          <LinkButton to={PATH.root}>
+          <LinkButton transparent to={PATH.root}>
             <img src={closeWhiteUrl} alt="닫기" />
           </LinkButton>
         </header>
