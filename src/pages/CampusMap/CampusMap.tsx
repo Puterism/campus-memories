@@ -102,44 +102,30 @@ const CampusMap = () => {
 
   return (
     <section className={styles.campusMapContainer} ref={containerRef}>
-      <LinkButton to={PATH.menu} className={styles.menuButton} primary aria-label="메뉴">
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="15.401" viewBox="0 0 21 15.401">
-          <g transform="translate(-285.437 -577.515)">
-            <line
-              x2="21"
-              transform="translate(285.437 578.015)"
-              fill="none"
-              stroke="#fff"
-              strokeWidth="1"
-            />
-            <line
-              x2="21"
-              transform="translate(285.437 585.215)"
-              fill="none"
-              stroke="#fff"
-              strokeWidth="1"
-            />
-            <path d="M285.437,592.416h21" fill="#374DBA" stroke="#fff" strokeWidth="1" />
+      <LinkButton to={PATH.menu} primary className={styles.menuButton} aria-label="메뉴">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="16" viewBox="0 0 21 16">
+          <g>
+            <line x2="21" transform="translate(0 1)" fill="none" stroke="#fff" strokeWidth="1" />
+            <line x2="21" transform="translate(0 8)" fill="none" stroke="#fff" strokeWidth="1" />
+            <line x2="21" transform="translate(0 15)" fill="none" stroke="#fff" strokeWidth="1" />
           </g>
         </svg>
       </LinkButton>
       <LinkButton
-        className={styles.shareButton}
-        onClick={handleClickShare}
         primary
+        className={styles.shareButton}
         aria-label="링크 공유"
+        onClick={handleClickShare}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="23.836" viewBox="0 0 21 23.836">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="24" viewBox="0 0 21 24">
           <g transform="translate(-12 -8.164)">
             <g transform="translate(-373.437 -562.716)">
-              <rect width="21" height="16" transform="translate(385.437 578.716)" fill="none" />
               <path
                 d="M398.926,579.216h7.011v15h-20v-15h6.979"
                 fill="none"
                 stroke="#fff"
                 strokeWidth="1"
               />
-              <path d="M398.926,579.216" fill="none" stroke="#fff" strokeWidth="1" />
             </g>
             <g transform="translate(-373.437 -562.716)">
               <line
@@ -149,7 +135,6 @@ const CampusMap = () => {
                 stroke="#fff"
                 strokeWidth="1"
               />
-
               <path
                 d="M391.889,575.635l4.048-4.048,4.048,4.048"
                 fill="none"
