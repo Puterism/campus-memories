@@ -1,5 +1,8 @@
 .container {
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .header {
@@ -21,8 +24,10 @@
 }
 
 .article {
-  margin: 1.875rem;
+  padding: 1.875rem;
   font-size: 1.125rem;
   letter-spacing: -0.1pt;
   line-height: 1.6;
+  min-height: 0;
+  overflow-y: auto;
 }
