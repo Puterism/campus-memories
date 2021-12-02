@@ -212,18 +212,27 @@ const CampusMap = () => {
           ref={svgRef}
         >
           <Background pixelated={imagePixelated} />
-          {Object.entries(SVG_DATA).map(([building, data]) => (
-            <BuildingImage
-              key={building}
-              building={building}
-              active={
-                pathname === BUILDING[building as Building].path || activeBuilding === building
-              }
-              pixelated={imagePixelated}
-              onClick={() => handleClickBuilding(building as Building)}
-              {...data}
-            />
-          ))}
+          {Object.entries(SVG_DATA).map(([building, data]) => {
+            const isActiveBuildingZ =
+              (building === Building.Z2Z3 || building === Building.Z4) &&
+              activeBuilding === Building.Z1;
+
+            const active =
+              pathname === BUILDING[building as Building].path ||
+              activeBuilding === building ||
+              isActiveBuildingZ;
+
+            return (
+              <BuildingImage
+                key={building}
+                building={building}
+                active={active}
+                pixelated={imagePixelated}
+                onClick={() => handleClickBuilding(building as Building)}
+                {...data}
+              />
+            );
+          })}
           <Foreground pixelated={imagePixelated} />
         </g>
       </svg>
