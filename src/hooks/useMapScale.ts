@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import CAMPUS_MAP from '../constants/campusMap';
 import { Coordinate, MapStatus } from '../types/common';
 import useWindowSize from './useWindowSize';
@@ -9,6 +10,8 @@ interface Params {
 }
 
 const useMapScale = ({ mapStatusState, containerRef }: Params) => {
+  const location = useLocation();
+
   const [, setMapStatus] = mapStatusState;
   const [initialScale, setInitialScale] = useState<number | null>(null);
 
@@ -180,21 +183,34 @@ const useMapScale = ({ mapStatusState, containerRef }: Params) => {
   }, [containerRef, setMapStatus]);
 
   useLayoutEffect(() => {
-    if (!containerRef.current) return;
+    const containerEl = containerRef.current;
+
+    if (!containerEl) return;
 
     const nextScale = Math.max(
-      containerRef.current.offsetWidth / CAMPUS_MAP.MAP_WIDTH,
-      containerRef.current.offsetHeight / CAMPUS_MAP.MAP_HEIGHT
+      containerEl.offsetWidth / CAMPUS_MAP.MAP_WIDTH,
+      containerEl.offsetHeight / CAMPUS_MAP.MAP_HEIGHT
     );
 
-    setMapStatus((prevStatus) => ({
-      ...prevStatus,
-      y: 0,
-      scale: prevStatus.scale > nextScale ? prevStatus.scale : nextScale,
-    }));
+    setMapStatus((prevStatus) => {
+      const { scale, x, y, width, height } = prevStatus;
+
+      const nextX = x + width * scale;
+      const nextY = y + height * scale;
+
+      const minX = containerEl.offsetWidth - width * scale;
+      const minY = containerEl.offsetHeight - height * scale;
+
+      return {
+        ...prevStatus,
+        x: nextX <= containerEl.offsetWidth ? minX : x,
+        y: nextY <= containerEl.offsetHeight ? minY : y,
+        scale: prevStatus.scale > nextScale ? prevStatus.scale : nextScale,
+      };
+    });
 
     setInitialScale(nextScale);
-  }, [containerRef, setMapStatus, windowSize]);
+  }, [containerRef, setMapStatus, location.pathname, windowSize]);
 
   return {
     onWheel,
